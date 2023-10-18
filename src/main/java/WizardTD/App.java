@@ -41,11 +41,11 @@ public class App extends PApplet {
     /**
      * The constant WIDTH.
      */
-    public static int WIDTH = CELLSIZE*BOARD_WIDTH+SIDEBAR;
+    public static int WIDTH = CELLSIZE * BOARD_WIDTH + SIDEBAR;
     /**
      * The constant HEIGHT.
      */
-    public static int HEIGHT = BOARD_WIDTH*CELLSIZE+TOPBAR;
+    public static int HEIGHT = BOARD_WIDTH * CELLSIZE + TOPBAR;
 
     /**
      * The constant FPS.
@@ -178,7 +178,8 @@ public class App extends PApplet {
 
     private boolean addTower;
 
-    // Feel free to add any additional methods or attributes you want. Please put classes in different files.
+    // Feel free to add any additional methods or attributes you want. Please put
+    // classes in different files.
 
     /**
      * Instantiates a new App.
@@ -197,7 +198,8 @@ public class App extends PApplet {
     }
 
     /**
-     * Load all resources such as images. Initialise the elements such as the player, enemies and map elements.
+     * Load all resources such as images. Initialise the elements such as the
+     * player, enemies and map elements.
      */
     @Override
     public void setup() {
@@ -205,7 +207,6 @@ public class App extends PApplet {
 
         // Load images during setup
         // Eg:
-
 
         CURRENT_TIME = 0;
         WAVE_INDEX = -1;
@@ -230,14 +231,16 @@ public class App extends PApplet {
         paths = new Paths();
         buildMap(map);
         paths.findPaths(this);
-//        monsterManager.updateTimeInterval(this, 0);
+        // monsterManager.updateTimeInterval(this, 0);
         manaBar = new ManaBar(WIDTH - 250, 5, 30, "MANA", this);
-//        if (waves.length > 1) {
-//            showWave = new ShowWave(15, 25, WAVE_INDEX, (int)(waves[WAVE_INDEX].getDuration() + waves[WAVE_INDEX + 1].getPreWavePause()));
-//        }
-//        else {
-//            showWave = new ShowWave(15, 25, WAVE_INDEX, 0);
-//        }
+        // if (waves.length > 1) {
+        // showWave = new ShowWave(15, 25, WAVE_INDEX,
+        // (int)(waves[WAVE_INDEX].getDuration() + waves[WAVE_INDEX +
+        // 1].getPreWavePause()));
+        // }
+        // else {
+        // showWave = new ShowWave(15, 25, WAVE_INDEX, 0);
+        // }
         showWave = new ShowWave(15, 25, WAVE_INDEX, waves[WAVE_INDEX + 1].getPreWavePause());
         buttonList = new ButtonList(jsonInfo);
     }
@@ -253,8 +256,7 @@ public class App extends PApplet {
                 for (int j = 0; j < 20; j++) {
                     if (j < line.length()) {
                         map[i][j] = line.charAt(j);
-                    }
-                    else {
+                    } else {
                         map[i][j] = ' ';
                     }
                 }
@@ -266,93 +268,100 @@ public class App extends PApplet {
         return map;
     }
 
-//    private void BuildBar() {
-//        loadPixels();
-//        Bar topBar = new Bar(BAR_COLOR, TOPBAR, WIDTH, HEIGHT, WIDTH, 0, 0);
-//        Bar sideBar = new Bar(BAR_COLOR, HEIGHT - TOPBAR, SIDEBAR, HEIGHT, WIDTH, TOPBAR, CELLSIZE*BOARD_WIDTH);
-////        System.out.println(color(51, 204, 255));
-//        topBar.fillPixels(this.pixels);
-//        sideBar.fillPixels(this.pixels);
-//        updatePixels();
-//    }
+    // private void BuildBar() {
+    // loadPixels();
+    // Bar topBar = new Bar(BAR_COLOR, TOPBAR, WIDTH, HEIGHT, WIDTH, 0, 0);
+    // Bar sideBar = new Bar(BAR_COLOR, HEIGHT - TOPBAR, SIDEBAR, HEIGHT, WIDTH,
+    // TOPBAR, CELLSIZE*BOARD_WIDTH);
+    //// System.out.println(color(51, 204, 255));
+    // topBar.fillPixels(this.pixels);
+    // sideBar.fillPixels(this.pixels);
+    // updatePixels();
+    // }
 
     private void buildMap(char[][] map) {
-//        for (int i = 0; i < TOPBAR; i++) {
-//            for (int j = 0; j < WIDTH; j++) {
-//                this.pixels[i * WIDTH + j] = bufferedImage.getRGB(0, 0);
-//            }
-//        }
-//        for (int i = TOPBAR; i < HEIGHT; i++) {
-//            for (int j = 0; j < SIDEBAR; j++) {
-//                this.pixels[i * WIDTH + CELLSIZE*BOARD_WIDTH + j] = bufferedImage.getRGB(0, 0);
-//            }
-//        }
+        // for (int i = 0; i < TOPBAR; i++) {
+        // for (int j = 0; j < WIDTH; j++) {
+        // this.pixels[i * WIDTH + j] = bufferedImage.getRGB(0, 0);
+        // }
+        // }
+        // for (int i = TOPBAR; i < HEIGHT; i++) {
+        // for (int j = 0; j < SIDEBAR; j++) {
+        // this.pixels[i * WIDTH + CELLSIZE*BOARD_WIDTH + j] = bufferedImage.getRGB(0,
+        // 0);
+        // }
+        // }
         patterns = new Pattern[20][20];
 
         for (int i = 0; i < 20; i++) {
             for (int j = 0; j < 20; j++) {
                 if (map[i][j] == ' ') {
                     patterns[i][j] = new Grass(i, j, this);
-                }
-                else if (map[i][j] == 'S') {
+                } else if (map[i][j] == 'S') {
                     patterns[i][j] = new Shrub(i, j, this);
-                }
-                else if (map[i][j] == 'X') {
+                } else if (map[i][j] == 'X') {
                     patterns[i][j] = new Path(i, j, this);
                     if (i == 0 || i == 19 || j == 0 || j == 19) {
-//                        if (i == 0) {
-//                            ((Path)patterns[i][j]).setDirection(0);
-//                        }
-//                        else if (i == 19) {
-//                            ((Path)patterns[i][j]).setDirection(1);
-//                        }
-//                        else if (j == 0) {
-//                            ((Path)patterns[i][j]).setDirection(2);
-//                        }
-//                        else {
-//                            ((Path)patterns[i][j]).setDirection(3);
-//                        }
-                        paths.setStartPoints((Path)patterns[i][j]);
+                        // if (i == 0) {
+                        // ((Path)patterns[i][j]).setDirection(0);
+                        // }
+                        // else if (i == 19) {
+                        // ((Path)patterns[i][j]).setDirection(1);
+                        // }
+                        // else if (j == 0) {
+                        // ((Path)patterns[i][j]).setDirection(2);
+                        // }
+                        // else {
+                        // ((Path)patterns[i][j]).setDirection(3);
+                        // }
+                        paths.setStartPoints((Path) patterns[i][j]);
                     }
-//                    else if ((map[i - 1][j] != 'X' && map[i][j - 1] != 'X'&& map[i + 1][j] != 'X'&& map[i][j + 1] == 'X') ||
-//                            (map[i - 1][j] != 'X' && map[i][j - 1] != 'X'&& map[i + 1][j] == 'X'&& map[i][j + 1] != 'X') ||
-//                            (map[i - 1][j] != 'X' && map[i][j - 1] == 'X'&& map[i + 1][j] != 'X'&& map[i][j + 1] != 'X') ||
-//                            (map[i - 1][j] == 'X' && map[i][j - 1] != 'X'&& map[i + 1][j] != 'X'&& map[i][j + 1] != 'X')) {
-//                        paths.setStartPoints((Path)patterns[i][j]);
-//                    }
-//                    bufferedImage = (BufferedImage) pImage.getNative();
-//                    for (int k = 0; k < CELLSIZE; k++) {
-//                        for (int l = 0; l < CELLSIZE; l++) {
-//                            if (bufferedImage.getRGB(k, l) != 0) {
-//                                this.pixels[(TOPBAR + i * CELLSIZE) * this.width + l * this.width + (j * CELLSIZE) + k] = bufferedImage.getRGB(k, l);
-//                            }
-//                        }
-//                    }
-                }
-                else if (map[i][j] == 'W') {
+                    // else if ((map[i - 1][j] != 'X' && map[i][j - 1] != 'X'&& map[i + 1][j] !=
+                    // 'X'&& map[i][j + 1] == 'X') ||
+                    // (map[i - 1][j] != 'X' && map[i][j - 1] != 'X'&& map[i + 1][j] == 'X'&&
+                    // map[i][j + 1] != 'X') ||
+                    // (map[i - 1][j] != 'X' && map[i][j - 1] == 'X'&& map[i + 1][j] != 'X'&&
+                    // map[i][j + 1] != 'X') ||
+                    // (map[i - 1][j] == 'X' && map[i][j - 1] != 'X'&& map[i + 1][j] != 'X'&&
+                    // map[i][j + 1] != 'X')) {
+                    // paths.setStartPoints((Path)patterns[i][j]);
+                    // }
+                    // bufferedImage = (BufferedImage) pImage.getNative();
+                    // for (int k = 0; k < CELLSIZE; k++) {
+                    // for (int l = 0; l < CELLSIZE; l++) {
+                    // if (bufferedImage.getRGB(k, l) != 0) {
+                    // this.pixels[(TOPBAR + i * CELLSIZE) * this.width + l * this.width + (j *
+                    // CELLSIZE) + k] = bufferedImage.getRGB(k, l);
+                    // }
+                    // }
+                    // }
+                } else if (map[i][j] == 'W') {
                     patterns[i][j] = new WizardHouse(i, j, this);
-                    wizardHouse = (WizardHouse)(patterns[i][j]);
+                    wizardHouse = (WizardHouse) (patterns[i][j]);
                 }
             }
         }
-//        bufferedImage = (BufferedImage) pImage.getNative();
-//        for (int l = 0; l < pImage.width; l++) {
-//            for (int k = 0; k < pImage.height; k++) {
-//                if (bufferedImage.getRGB(k, l) != 0 && bufferedImage.getRGB(k, l) != -16777216) {
-//                    this.pixels[(TOPBAR + houseX * CELLSIZE + (CELLSIZE - pImage.height) / 2) * WIDTH
-//                            + l * WIDTH + (houseY * CELLSIZE + (CELLSIZE - pImage.width) / 2) + k] = bufferedImage.getRGB(k, l);
-//                }
-//            }
-//        }
+        // bufferedImage = (BufferedImage) pImage.getNative();
+        // for (int l = 0; l < pImage.width; l++) {
+        // for (int k = 0; k < pImage.height; k++) {
+        // if (bufferedImage.getRGB(k, l) != 0 && bufferedImage.getRGB(k, l) !=
+        // -16777216) {
+        // this.pixels[(TOPBAR + houseX * CELLSIZE + (CELLSIZE - pImage.height) / 2) *
+        // WIDTH
+        // + l * WIDTH + (houseY * CELLSIZE + (CELLSIZE - pImage.width) / 2) + k] =
+        // bufferedImage.getRGB(k, l);
+        // }
+        // }
+        // }
     }
 
     private void drawMap() {
         for (int i = 0; i < 20; i++) {
             for (int j = 0; j < 20; j++) {
                 patterns[i][j].fillPixels(this);
-//                if (patterns[i][j].getType().substring(0, 5).matches("tower")) {
-//                    System.out.println(((Tower)patterns[i][j]).getLevel()[0]);
-//                }
+                // if (patterns[i][j].getType().substring(0, 5).matches("tower")) {
+                // System.out.println(((Tower)patterns[i][j]).getLevel()[0]);
+                // }
             }
         }
     }
@@ -361,7 +370,7 @@ public class App extends PApplet {
      * Receive key pressed signal from the keyboard.
      */
     @Override
-    public void keyPressed(KeyEvent key){
+    public void keyPressed(KeyEvent key) {
         if (key.getKey() == 'p') {
             buttonList.getButtons()[1].clickButton(this);
         }
@@ -389,8 +398,7 @@ public class App extends PApplet {
             if (manaBar.getProcess() <= 0) {
                 setup();
                 FireBall.SPEED = 5f;
-            }
-            else if (WAVE_INDEX == waves.length && monsterManager.getMonsters().size() == 0) {
+            } else if (WAVE_INDEX == waves.length && monsterManager.getMonsters().size() == 0) {
                 IN_MENU = true;
             }
         }
@@ -400,7 +408,7 @@ public class App extends PApplet {
      * Receive key released signal from the keyboard.
      */
     @Override
-    public void keyReleased(){
+    public void keyReleased() {
 
     }
 
@@ -453,20 +461,19 @@ public class App extends PApplet {
                     buttonList.getButtons()[6].clickButton(this);
                 }
             }
-        }
-        else if (mouseInMap()) {
+        } else if (mouseInMap()) {
             int[] coordinate = patternCoordinate(e.getY(), e.getX());
             if (!PAUSE) {
                 if (CAN_BUILD_TOWER && patterns[coordinate[0]][coordinate[1]].getType().matches("grass.png")) {
                     patterns[coordinate[0]][coordinate[1]] = new Tower(coordinate[0], coordinate[1], this);
-                    towers.add((Tower)patterns[coordinate[0]][coordinate[1]]);
+                    towers.add((Tower) patterns[coordinate[0]][coordinate[1]]);
                     patterns[coordinate[0]][coordinate[1]].fillPixels(this);
                     this.addTower = true;
                     CAN_BUILD_TOWER = false;
                     buttonList.getButtons()[2].setUsing(false);
-                }
-                else if (patterns[coordinate[0]][coordinate[1]].getType().substring(0, 5).matches("tower") && canUpdateTower) {
-                    ((Tower)patterns[coordinate[0]][coordinate[1]]).updateLevel(isUpdateTower, this);
+                } else if (patterns[coordinate[0]][coordinate[1]].getType().substring(0, 5).matches("tower")
+                        && canUpdateTower) {
+                    ((Tower) patterns[coordinate[0]][coordinate[1]]).updateLevel(isUpdateTower, this);
                     canUpdateTower = false;
                 }
             }
@@ -480,13 +487,12 @@ public class App extends PApplet {
             if (buttonList.getButtons()[index].getLabel().matches("M")) {
                 buttonList.getButtons()[index].setUsing(false);
             }
-        }
-        else if (mouseInMap()) {
+        } else if (mouseInMap()) {
             int[] coordinate = patternCoordinate(e.getY(), e.getX());
             if (!PAUSE) {
                 if (CAN_BUILD_TOWER && patterns[coordinate[0]][coordinate[1]].getType().matches("grass.png")) {
                     patterns[coordinate[0]][coordinate[1]] = new Tower(coordinate[0], coordinate[1], this);
-                    towers.add((Tower)patterns[coordinate[0]][coordinate[1]]);
+                    towers.add((Tower) patterns[coordinate[0]][coordinate[1]]);
                     patterns[coordinate[0]][coordinate[1]].fillPixels(this);
                     this.addTower = true;
                     CAN_BUILD_TOWER = false;
@@ -497,10 +503,12 @@ public class App extends PApplet {
         }
     }
 
-    /*@Override
-    public void mouseDragged(MouseEvent e) {
-
-    }*/
+    /*
+     * @Override
+     * public void mouseDragged(MouseEvent e) {
+     * 
+     * }
+     */
 
     /**
      * Draw all elements in the game by current frame.
@@ -512,10 +520,9 @@ public class App extends PApplet {
             for (int i = 0; i < 4; i++) {
                 buttonList.getButtons()[i + 7].displayButton(this, color(0, 0, 0));
             }
-        }
-        else {
+        } else {
             if (!PAUSE) {
-//                background(BAR_COLOR);
+                // background(BAR_COLOR);
                 if (WAVE_INDEX < jsonInfo.getWaves().size()) {
                     monsterManager.generate(this);
                 }
@@ -532,7 +539,10 @@ public class App extends PApplet {
                     displayTowerRange(mouseY, mouseX);
                 }
                 if (mouseInButton(buttonList.getButtons()) == 6) {
-                    ((ManaPool)buttonList.getButtons()[6]).display(this);
+                    ((ManaPool) buttonList.getButtons()[6]).display(this);
+                }
+                if (mouseInButton(buttonList.getButtons()) == 2) {
+                    ((PutTower) buttonList.getButtons()[2]).display(this);
                 }
                 if (WAVE_INDEX < waves.length - 1) {
                     showWave.displayText(this, WORD_COLOR);
@@ -547,7 +557,8 @@ public class App extends PApplet {
                 textSize(CELLSIZE);
                 text("YOU LOST", (float) ((BOARD_WIDTH - 8) * CELLSIZE) / 2, 5 * CELLSIZE + TOPBAR);
                 textSize((float) CELLSIZE / 2);
-                text("Press 'r' to restart", (float) ((BOARD_WIDTH - 8) * CELLSIZE) / 2 - 15, 5 * CELLSIZE + TOPBAR + 60);
+                text("Press 'r' to restart", (float) ((BOARD_WIDTH - 8) * CELLSIZE) / 2 - 15,
+                        5 * CELLSIZE + TOPBAR + 60);
                 PAUSE = true;
             }
             if (WAVE_INDEX == waves.length && monsterManager.getMonsters().size() == 0) {
@@ -570,8 +581,7 @@ public class App extends PApplet {
                 for (int j = 0; j < WIDTH; j++) {
                     pixels[i * WIDTH + j] = BAR_COLOR;
                 }
-            }
-            else {
+            } else {
                 for (int j = BOARD_WIDTH * CELLSIZE; j < WIDTH; j++) {
                     pixels[i * WIDTH + j] = BAR_COLOR;
                 }
@@ -583,7 +593,7 @@ public class App extends PApplet {
     private void displayTowerRange(int x, int y) {
         int[] coordinate = patternCoordinate(x, y);
         if (patterns[coordinate[0]][coordinate[1]].getType().substring(0, 5).matches("tower")) {
-            ((Tower)patterns[coordinate[0]][coordinate[1]]).display(this);
+            ((Tower) patterns[coordinate[0]][coordinate[1]]).display(this);
         }
     }
 
@@ -646,7 +656,8 @@ public class App extends PApplet {
     }
 
     /**
-     * Source: https://stackoverflow.com/questions/37758061/rotate-a-buffered-image-in-java
+     * Source:
+     * https://stackoverflow.com/questions/37758061/rotate-a-buffered-image-in-java
      *
      * @param pimg  The image to be rotated
      * @param angle between 0 and 360 degrees
@@ -662,7 +673,8 @@ public class App extends PApplet {
         int newHeight = (int) Math.floor(h * cos + w * sin);
 
         PImage result = this.createImage(newWidth, newHeight, RGB);
-        //BufferedImage rotated = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_ARGB);
+        // BufferedImage rotated = new BufferedImage(newWidth, newHeight,
+        // BufferedImage.TYPE_INT_ARGB);
         BufferedImage rotated = (BufferedImage) result.getNative();
         Graphics2D g2d = rotated.createGraphics();
         AffineTransform at = new AffineTransform();
