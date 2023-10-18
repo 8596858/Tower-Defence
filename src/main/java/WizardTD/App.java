@@ -462,8 +462,8 @@ public class App extends PApplet {
                     towers.add((Tower)patterns[coordinate[0]][coordinate[1]]);
                     patterns[coordinate[0]][coordinate[1]].fillPixels(this);
                     this.addTower = true;
-                    CAN_BUILD_TOWER = false;
-                    buttonList.getButtons()[2].setUsing(false);
+//                    CAN_BUILD_TOWER = false;
+//                    buttonList.getButtons()[2].setUsing(false);
                 }
                 else if (patterns[coordinate[0]][coordinate[1]].getType().substring(0, 5).matches("tower") && canUpdateTower) {
                     ((Tower)patterns[coordinate[0]][coordinate[1]]).updateLevel(isUpdateTower, this);
@@ -489,8 +489,8 @@ public class App extends PApplet {
                     towers.add((Tower)patterns[coordinate[0]][coordinate[1]]);
                     patterns[coordinate[0]][coordinate[1]].fillPixels(this);
                     this.addTower = true;
-                    CAN_BUILD_TOWER = false;
-                    buttonList.getButtons()[2].setUsing(false);
+//                    CAN_BUILD_TOWER = false;
+//                    buttonList.getButtons()[2].setUsing(false);
                 }
                 canUpdateTower = true;
             }
@@ -560,7 +560,6 @@ public class App extends PApplet {
                 buttonList.getButtons()[i].displayButton(this, color(0, 0, 0));
             }
         }
-
     }
 
     private void drawBar() {
