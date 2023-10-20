@@ -29,14 +29,12 @@ public abstract class Pattern {
      *
      * @param x    the x coordinate of pattern
      * @param y    the y coordinate of pattern
-     * @param app  the main app
      * @param type the type of pattern
      */
-    public Pattern(int x, int y, App app, String type) {
+    public Pattern(int x, int y, String type) {
         this.x = x;
         this.y = y;
         this.setType(type);
-        this.setImage(app);
     }
 
     /**
@@ -82,6 +80,15 @@ public abstract class Pattern {
      */
     public int getY() {
         return y;
+    }
+
+    /**
+     * Gets image of the pattern.
+     *
+     * @return the image
+     */
+    public PImage getImage() {
+        return image;
     }
 
     /**

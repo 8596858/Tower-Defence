@@ -24,16 +24,14 @@ public class FireBall implements Effect{
      *
      * @param x      the x coordinate of fireball.
      * @param y      the y coordinate of fireball.
-     * @param app    the app
      * @param damage the damage.
      * @param target the target of fireball.
      */
-    public FireBall(float x, float y, App app, double damage, Monster target) {
+    public FireBall(float x, float y, double damage, Monster target) {
         this.x = x * App.CELLSIZE + App.TOPBAR + (float) App.CELLSIZE / 2;
         this.y = y * App.CELLSIZE + (float) App.CELLSIZE / 2;
         this.damage = damage;
         this.type = "fireball.png";
-        this.image = app.loadImage("src/main/resources/WizardTD/" + this.type);
         this.target = target;
         this.finish = false;
     }
@@ -66,6 +64,9 @@ public class FireBall implements Effect{
      */
     @Override
     public void draw(App app) {
+        if (this.image == null) {
+            this.image = app.loadImage("src/main/resources/WizardTD/" + this.type);
+        }
         app.image(this.image, y - (float) this.image.width / 2, x - (float) this.image.height / 2);
     }
 
@@ -80,10 +81,9 @@ public class FireBall implements Effect{
                 + (target.getY() + (double) App.CELLSIZE / 2 - this.y) * (target.getY() + (double) App.CELLSIZE / 2 - this.y));
         this.x = (float) (this.x + (target.getX() + (double) App.CELLSIZE / 2  - this.x) / distance * SPEED);
         this.y = (float) (this.y + (target.getY() + (double) App.CELLSIZE / 2 - this.y) / distance * SPEED);
-        if (distance < (float) App.CELLSIZE) {
+        if (distance < (float) App.CELLSIZE / 2) {
             finish = true;
             target.setHp(damage);
         }
-        draw(app);
     }
 }

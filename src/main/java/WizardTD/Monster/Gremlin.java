@@ -31,13 +31,12 @@ public class Gremlin extends Monster {
     public boolean monsterDie(App app) {
         if (index < 24) {
             if (index >= 4) {
-                this.image = app.loadImage("src/main/resources/WizardTD/gremlin" + (index / 4) + ".png");
+                this.type = "gremlin" + (index / 4) + ".png";
             }
         }
         else {
             return true;
         }
-        draw(app);
         index++;
         return false;
     }

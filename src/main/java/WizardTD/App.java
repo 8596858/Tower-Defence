@@ -229,7 +229,7 @@ public class App extends PApplet {
         map = mapInfo(jsonInfo);
         currentMana = jsonInfo.getInitial_mana();
         paths = new Paths();
-        buildMap(map);
+        buildMap(map, paths);
         paths.findPaths(this);
         // monsterManager.updateTimeInterval(this, 0);
         manaBar = new ManaBar(WIDTH - 250, 5, 30, "MANA", this);
@@ -245,7 +245,13 @@ public class App extends PApplet {
         buttonList = new ButtonList(jsonInfo);
     }
 
-    private char[][] mapInfo(JsonInfo jsonInfo) {
+    /**
+     * Store the map info into char array.
+     *
+     * @param jsonInfo json file information.
+     * @return the char array.
+     */
+    public char[][] mapInfo(JsonInfo jsonInfo) {
         File file = new File(jsonInfo.getLayout());
         char[][] map = new char[20][20];
         try {
@@ -279,89 +285,35 @@ public class App extends PApplet {
     // updatePixels();
     // }
 
-    private void buildMap(char[][] map) {
-        // for (int i = 0; i < TOPBAR; i++) {
-        // for (int j = 0; j < WIDTH; j++) {
-        // this.pixels[i * WIDTH + j] = bufferedImage.getRGB(0, 0);
-        // }
-        // }
-        // for (int i = TOPBAR; i < HEIGHT; i++) {
-        // for (int j = 0; j < SIDEBAR; j++) {
-        // this.pixels[i * WIDTH + CELLSIZE*BOARD_WIDTH + j] = bufferedImage.getRGB(0,
-        // 0);
-        // }
-        // }
+    public void buildMap(char[][] map, Paths paths) {
         patterns = new Pattern[20][20];
 
         for (int i = 0; i < 20; i++) {
             for (int j = 0; j < 20; j++) {
                 if (map[i][j] == ' ') {
-                    patterns[i][j] = new Grass(i, j, this);
+                    patterns[i][j] = new Grass(i, j);
                 } else if (map[i][j] == 'S') {
-                    patterns[i][j] = new Shrub(i, j, this);
+                    patterns[i][j] = new Shrub(i, j);
                 } else if (map[i][j] == 'X') {
-                    patterns[i][j] = new Path(i, j, this);
+                    patterns[i][j] = new Path(i, j);
                     if (i == 0 || i == 19 || j == 0 || j == 19) {
-                        // if (i == 0) {
-                        // ((Path)patterns[i][j]).setDirection(0);
-                        // }
-                        // else if (i == 19) {
-                        // ((Path)patterns[i][j]).setDirection(1);
-                        // }
-                        // else if (j == 0) {
-                        // ((Path)patterns[i][j]).setDirection(2);
-                        // }
-                        // else {
-                        // ((Path)patterns[i][j]).setDirection(3);
-                        // }
                         paths.setStartPoints((Path) patterns[i][j]);
                     }
-                    // else if ((map[i - 1][j] != 'X' && map[i][j - 1] != 'X'&& map[i + 1][j] !=
-                    // 'X'&& map[i][j + 1] == 'X') ||
-                    // (map[i - 1][j] != 'X' && map[i][j - 1] != 'X'&& map[i + 1][j] == 'X'&&
-                    // map[i][j + 1] != 'X') ||
-                    // (map[i - 1][j] != 'X' && map[i][j - 1] == 'X'&& map[i + 1][j] != 'X'&&
-                    // map[i][j + 1] != 'X') ||
-                    // (map[i - 1][j] == 'X' && map[i][j - 1] != 'X'&& map[i + 1][j] != 'X'&&
-                    // map[i][j + 1] != 'X')) {
-                    // paths.setStartPoints((Path)patterns[i][j]);
-                    // }
-                    // bufferedImage = (BufferedImage) pImage.getNative();
-                    // for (int k = 0; k < CELLSIZE; k++) {
-                    // for (int l = 0; l < CELLSIZE; l++) {
-                    // if (bufferedImage.getRGB(k, l) != 0) {
-                    // this.pixels[(TOPBAR + i * CELLSIZE) * this.width + l * this.width + (j *
-                    // CELLSIZE) + k] = bufferedImage.getRGB(k, l);
-                    // }
-                    // }
-                    // }
                 } else if (map[i][j] == 'W') {
-                    patterns[i][j] = new WizardHouse(i, j, this);
+                    patterns[i][j] = new WizardHouse(i, j);
                     wizardHouse = (WizardHouse) (patterns[i][j]);
                 }
             }
         }
-        // bufferedImage = (BufferedImage) pImage.getNative();
-        // for (int l = 0; l < pImage.width; l++) {
-        // for (int k = 0; k < pImage.height; k++) {
-        // if (bufferedImage.getRGB(k, l) != 0 && bufferedImage.getRGB(k, l) !=
-        // -16777216) {
-        // this.pixels[(TOPBAR + houseX * CELLSIZE + (CELLSIZE - pImage.height) / 2) *
-        // WIDTH
-        // + l * WIDTH + (houseY * CELLSIZE + (CELLSIZE - pImage.width) / 2) + k] =
-        // bufferedImage.getRGB(k, l);
-        // }
-        // }
-        // }
     }
 
     private void drawMap() {
         for (int i = 0; i < 20; i++) {
             for (int j = 0; j < 20; j++) {
+                if (patterns[i][j].getImage() == null) {
+                    patterns[i][j].setImage(this);
+                }
                 patterns[i][j].fillPixels(this);
-                // if (patterns[i][j].getType().substring(0, 5).matches("tower")) {
-                // System.out.println(((Tower)patterns[i][j]).getLevel()[0]);
-                // }
             }
         }
     }
@@ -467,6 +419,7 @@ public class App extends PApplet {
                 if (CAN_BUILD_TOWER && patterns[coordinate[0]][coordinate[1]].getType().matches("grass.png")) {
                     patterns[coordinate[0]][coordinate[1]] = new Tower(coordinate[0], coordinate[1], this);
                     towers.add((Tower) patterns[coordinate[0]][coordinate[1]]);
+                    patterns[coordinate[0]][coordinate[1]].setImage(this);
                     patterns[coordinate[0]][coordinate[1]].fillPixels(this);
                     this.addTower = true;
                     CAN_BUILD_TOWER = false;
@@ -474,6 +427,7 @@ public class App extends PApplet {
                 } else if (patterns[coordinate[0]][coordinate[1]].getType().substring(0, 5).matches("tower")
                         && canUpdateTower) {
                     ((Tower) patterns[coordinate[0]][coordinate[1]]).updateLevel(isUpdateTower, this);
+                    patterns[coordinate[0]][coordinate[1]].setImage(this);
                     canUpdateTower = false;
                 }
             }
@@ -493,6 +447,7 @@ public class App extends PApplet {
                 if (CAN_BUILD_TOWER && patterns[coordinate[0]][coordinate[1]].getType().matches("grass.png")) {
                     patterns[coordinate[0]][coordinate[1]] = new Tower(coordinate[0], coordinate[1], this);
                     towers.add((Tower) patterns[coordinate[0]][coordinate[1]]);
+                    patterns[coordinate[0]][coordinate[1]].setImage(this);
                     patterns[coordinate[0]][coordinate[1]].fillPixels(this);
                     this.addTower = true;
                     CAN_BUILD_TOWER = false;
@@ -529,11 +484,13 @@ public class App extends PApplet {
                 fireBallManager.generate(this);
                 drawMap();
                 monsterManager.update(this);
+                monsterManager.drawElement(this);
                 if (manaBar.getProcess() <= Tower.TOWER_COST) {
                     buttonList.getButtons()[2].setUsing(false);
                     CAN_BUILD_TOWER = false;
                 }
                 fireBallManager.update(this);
+                fireBallManager.drawElement(this);
                 drawBar();
                 if (mouseInMap()) {
                     displayTowerRange(mouseY, mouseX);

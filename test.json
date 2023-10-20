@@ -1,10 +1,10 @@
 {
-  "layout": "level0.txt",
+  "layout": "test.txt",
   "waves": [
     {
       "duration": 8,
       "pre_wave_pause": 0.5,
-	  "monsters": [
+      "monsters": [
         {
           "type": "gremlin",
           "hp": 100,
@@ -13,7 +13,7 @@
           "mana_gained_on_kill": 10,
           "quantity": 10
         }
-	  ]
+      ]
     },
     {
       "duration": 5,

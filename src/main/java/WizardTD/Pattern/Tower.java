@@ -29,7 +29,7 @@ public class Tower extends Pattern implements Display {
      * @param app the app
      */
     public Tower(int x, int y, App app) {
-        super(x, y, app, "tower0.png");
+        super(x, y, "tower0.png");
         this.timer = System.currentTimeMillis();
         this.level = new int[3];
         this.level[0] = app.towerLevel[0];
@@ -211,7 +211,6 @@ public class Tower extends Pattern implements Display {
         else {
             this.type = "tower0.png";
         }
-        this.image = app.loadImage("src/main/resources/WizardTD/" + this.type);
     }
 
     /**
@@ -229,6 +228,7 @@ public class Tower extends Pattern implements Display {
         }
     }
 
+    @Override
     public void fillPixels(App app) {
         app.image(this.image, y * App.CELLSIZE, x * App.CELLSIZE + App.TOPBAR);
         if (!(this.level[0] == 1 && this.level[1] == 1 && this.level[2] == 1) &&

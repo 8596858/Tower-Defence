@@ -28,7 +28,7 @@ public class Beetle extends Monster {
     @Override
     public void move(App app) {
         if (currentPath.getDirection().get(index) == 0) {
-            this.image = app.loadImage("src/main/resources/WizardTD/beetle2.png");
+            this.type = "beetle2.png";
             if (this.x >= (currentPath.getX() + 1) * App.CELLSIZE + App.TOPBAR) {
                 if (currentPath.getParent().size() == 0) {
                     this.x = this.startX;
@@ -44,7 +44,7 @@ public class Beetle extends Monster {
             }
         }
         else if (currentPath.getDirection().get(index) == 1) {
-            this.image = app.loadImage("src/main/resources/WizardTD/beetle.png");
+            this.type = "beetle.png";
             if (this.x <= (currentPath.getX() - 1) * App.CELLSIZE + App.TOPBAR) {
                 if (currentPath.getParent().size() == 0) {
                     this.x = this.startX;
@@ -60,7 +60,7 @@ public class Beetle extends Monster {
             }
         }
         else if (currentPath.getDirection().get(index) == 2) {
-            this.image = app.loadImage("src/main/resources/WizardTD/beetle1.png");
+            this.type = "beetle1.png";
             if (this.y >= (currentPath.getY() + 1) * App.CELLSIZE) {
                 if (currentPath.getParent().size() == 0) {
                     this.x = this.startX;
@@ -76,8 +76,8 @@ public class Beetle extends Monster {
             }
         }
         else {
+            this.type = "beetle3.png";
             if (this.y <= (currentPath.getY() - 1) * App.CELLSIZE) {
-                this.image = app.loadImage("src/main/resources/WizardTD/beetle3.png");
                 if (currentPath.getParent().size() == 0) {
                     this.x = this.startX;
                     this.y = this.startY;
@@ -103,17 +103,14 @@ public class Beetle extends Monster {
         else if (currentPath.getDirection().get(index) == 3) {
             this.y -= speed;
         }
-        this.draw(app);
-        this.displayRect(app);
     }
 
     @Override
     public boolean monsterDie(App app) {
         if (index < 16) {
             if (index >= 4) {
-                this.image = app.loadImage("src/main/resources/WizardTD/beetle" + (index / 4) + ".png");
+                this.type = "beetle" + (index / 4) + ".png";
             }
-            draw(app);
         }
         else {
             return true;

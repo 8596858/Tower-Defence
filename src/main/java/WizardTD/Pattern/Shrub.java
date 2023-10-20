@@ -11,9 +11,8 @@ public class Shrub extends Pattern{
      *
      * @param x   the x coordinate of shrub.
      * @param y   the y coordinate of shrub.
-     * @param app the app
      */
-    public Shrub(int x, int y, App app) {
-        super(x, y, app, "shrub.png");
+    public Shrub(int x, int y) {
+        super(x, y, "shrub.png");
     }
 }

@@ -7,15 +7,12 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 class ButtonListTest {
-    @Test
-    @Disabled("TODO: Complete this test")
-    void testConstructor() {
-        new ButtonList(null);
-    }
-
+    /**
+     * Test get buttons.
+     */
     @Test
     void testGetButtons() {
-        assertEquals(11, (new ButtonList(new JsonInfo("/directory/foo.txt"))).getButtons().length);
+        assertEquals(11, (new ButtonList(new JsonInfo("config.json"))).getButtons().length);
     }
 }
 

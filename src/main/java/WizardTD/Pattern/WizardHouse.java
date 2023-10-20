@@ -8,24 +8,15 @@ import java.awt.image.BufferedImage;
  * The type Wizard house.
  */
 public class WizardHouse extends Pattern{
-    private Path path1;
-    private Path path2;
-    private Path path3;
-    private Path path4;
 
     /**
      * Constructor: instantiates a new Wizard house.
      *
      * @param x   the x coordinate of wizard house.
      * @param y   the y x coordinate of wizard house.
-     * @param app the app
      */
-    public WizardHouse(int x, int y, App app) {
-        super(x, y, app, "wizard_house.png");
-        this.path1 = null;
-        this.path2 = null;
-        this.path3 = null;
-        this.path4 = null;
+    public WizardHouse(int x, int y) {
+        super(x, y, "wizard_house.png");
     }
 
     @Override

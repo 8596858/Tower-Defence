@@ -5,10 +5,26 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import WizardTD.App;
+import WizardTD.FireBall;
+import WizardTD.JsonInfo;
+import WizardTD.Monster.Gremlin;
+import WizardTD.Paths;
+import WizardTD.Pattern.Path;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 class FireBallManagerTest {
+    FireBallManager fireBallManager = new FireBallManager();
+    App app = new App();
+
+//    @BeforeAll
+//    public void setUp() {
+//        app.jsonInfo = new JsonInfo("config.json");
+//        app.paths = new Paths();
+//        app.paths.setStartPoints(new Path(0, 0, app));
+//        app.monsterManager = new MonsterManager(app);
+//    }
 
     @Test
     void testConstructor() {
@@ -16,9 +32,13 @@ class FireBallManagerTest {
     }
 
     @Test
+    void testGenerate() {
+
+    }
+
+    @Test
     void testUpdate() {
-        FireBallManager fireBallManager = new FireBallManager();
-        App app = new App();
+        fireBallManager = new FireBallManager();
         fireBallManager.update(app);
         assertFalse(app.exitCalled());
         assertEquals(100, app.width);

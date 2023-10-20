@@ -4,6 +4,7 @@ import WizardTD.App;
 import WizardTD.Monster.Beetle;
 import WizardTD.Monster.Gremlin;
 import WizardTD.Monster.Monster;
+import WizardTD.Monster.Worm;
 import processing.data.JSONObject;
 
 import java.util.ArrayList;
@@ -117,6 +118,9 @@ public class MonsterManager extends Manager<Monster> {
                     else if (monsterObject.getString("type").matches("beetle")) {
                         list.add(new Beetle(app.paths.getStartPoints().get(app.random.nextInt(app.paths.getStartPoints().size())), app, monsterObject));
                     }
+                    else if (monsterObject.getString("type").matches("Worm")) {
+                        list.add(new Worm(app.paths.getStartPoints().get(app.random.nextInt(app.paths.getStartPoints().size())), app, monsterObject));
+                    }
                     MONSTER_INDEX++;
                 }
                 App.CURRENT_TIME = System.currentTimeMillis();
@@ -142,6 +146,19 @@ public class MonsterManager extends Manager<Monster> {
                     MONSTER_INDEX = 0;
                     monsterObject = app.waves[App.WAVE_INDEX].getMonsters().getJSONObject(MONSTERS_INDEX);
                 }
+            }
+        }
+    }
+
+    @Override
+    public void drawElement(App app) {
+        for (Monster monster : list) {
+            monster.setImage(app);
+            monster.draw(app);
+        }
+        for (Monster monster : list) {
+            if (!monster.isDie()) {
+                monster.displayRect(app);
             }
         }
     }

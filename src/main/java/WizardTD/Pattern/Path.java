@@ -20,10 +20,9 @@ public class Path extends Pattern{
      * Constructor: instantiates a new Path.
      * @param x the x coordinate of path
      * @param y the y coordinate of path
-     * @param app the main app
      */
-    public Path(int x, int y, App app) {
-        super(x, y, app, "path");
+    public Path(int x, int y) {
+        super(x, y, "path");
         this.parent = new ArrayList<>();
         this.length = 0;
         this.direction = new ArrayList<>();

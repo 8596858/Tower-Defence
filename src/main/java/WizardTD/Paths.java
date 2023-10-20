@@ -97,8 +97,8 @@ public class Paths {
                 if (closedList.contains(app.patterns[temp.getX() + 1][temp.getY()].hashCode())) {
                     if (((Path)app.patterns[temp.getX() + 1][temp.getY()]).getLength() > temp.getLength() + 1) {
                         ((Path)app.patterns[temp.getX() + 1][temp.getY()]).setLength(temp.getLength() + 1);
-                        ((Path)app.patterns[temp.getX() - 1][temp.getY()]).clearParent();
-                        ((Path)app.patterns[temp.getX() - 1][temp.getY()]).clearDirection();
+                        ((Path)app.patterns[temp.getX() + 1][temp.getY()]).clearParent();
+                        ((Path)app.patterns[temp.getX() + 1][temp.getY()]).clearDirection();
                         ((Path)app.patterns[temp.getX() + 1][temp.getY()]).setParent(temp);
                         ((Path)app.patterns[temp.getX() + 1][temp.getY()]).setDirection(1);
                     }
@@ -119,8 +119,8 @@ public class Paths {
                 if (closedList.contains(app.patterns[temp.getX()][temp.getY() - 1].hashCode())) {
                     if (((Path)app.patterns[temp.getX()][temp.getY() - 1]).getLength() > temp.getLength() + 1) {
                         ((Path)app.patterns[temp.getX()][temp.getY() - 1]).setLength(temp.getLength() + 1);
-                        ((Path)app.patterns[temp.getX() - 1][temp.getY()]).clearParent();
-                        ((Path)app.patterns[temp.getX() - 1][temp.getY()]).clearDirection();
+                        ((Path)app.patterns[temp.getX()][temp.getY() - 1]).clearParent();
+                        ((Path)app.patterns[temp.getX()][temp.getY() - 1]).clearDirection();
                         ((Path)app.patterns[temp.getX()][temp.getY() - 1]).setParent(temp);
                         ((Path)app.patterns[temp.getX()][temp.getY() - 1]).setDirection(2);
                     }
@@ -141,8 +141,8 @@ public class Paths {
                 if (closedList.contains(app.patterns[temp.getX()][temp.getY() + 1].hashCode())) {
                     if (((Path)app.patterns[temp.getX()][temp.getY() + 1]).getLength() > temp.getLength() + 1) {
                         ((Path)app.patterns[temp.getX()][temp.getY() + 1]).setLength(temp.getLength() + 1);
-                        ((Path)app.patterns[temp.getX() - 1][temp.getY()]).clearParent();
-                        ((Path)app.patterns[temp.getX() - 1][temp.getY()]).clearDirection();
+                        ((Path)app.patterns[temp.getX()][temp.getY() + 1]).clearParent();
+                        ((Path)app.patterns[temp.getX()][temp.getY() + 1]).clearDirection();
                         ((Path)app.patterns[temp.getX()][temp.getY() + 1]).setParent(temp);
                         ((Path)app.patterns[temp.getX()][temp.getY() + 1]).setDirection(3);
                     }

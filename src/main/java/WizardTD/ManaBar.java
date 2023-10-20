@@ -56,6 +56,15 @@ public class ManaBar implements Display{
     }
 
     /**
+     * Gets gained speed of mana.
+     *
+     * @return speed
+     */
+    public float getGainedSpeed() {
+        return gainedSpeed;
+    }
+
+    /**
      * Gets mana cap.
      *
      * @return the mana cap
@@ -159,6 +168,7 @@ public class ManaBar implements Display{
     public void updateManaBar(ManaPool manaPool) {
         this.gainedSpeed = (float) (this.gainedSpeed * manaPool.getManaPoolSpellGainedMultiplier());
         this.manaCap = (float) (this.manaCap * manaPool.getManaPoolSpellCapMultiplier());
+        this.process = this.process - manaPool.getManaPoolSpellCost();
     }
 
     @Override

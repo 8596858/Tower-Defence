@@ -51,9 +51,16 @@ public class FireBallManager extends Manager<FireBall>{
                 }
             }
             if (test <= tower.getRange() && System.currentTimeMillis() - tower.getTimer() >= 1000 / tower.getFiringSpeed()) {
-                list.add(new FireBall(tower.getX(), tower.getY(), app, tower.getDamage(), app.monsterManager.getMonsters().get(index)));
+                list.add(new FireBall(tower.getX(), tower.getY(), tower.getDamage(), app.monsterManager.getMonsters().get(index)));
                 tower.setTimer(System.currentTimeMillis());
             }
+        }
+    }
+
+    @Override
+    public void drawElement(App app) {
+        for (FireBall fireBall : list) {
+            fireBall.draw(app);
         }
     }
 }

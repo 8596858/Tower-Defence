@@ -4,19 +4,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import WizardTD.App;
-import org.checkerframework.checker.units.qual.A;
 import org.junit.jupiter.api.Test;
 
-class Level1Test {
+class Level3Test {
     /**
-     * Method under test: {@link Level1#clickButton(App)}
+     * Method under test: {@link Level3#clickButton(App)}
      */
     @Test
     void testClickButton() {
         App app = new App();
-        Level1 level1 = new Level1(2, 3, 3);
-        level1.clickButton(app);
-        assertEquals("config1.json", app.configPath);
+        Level3 level3 = new Level3(2, 3, 3);
+        level3.clickButton(app);
+        assertEquals("config3.json", app.configPath);
     }
 }
 

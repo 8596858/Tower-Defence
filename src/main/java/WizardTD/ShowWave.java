@@ -38,6 +38,15 @@ public class ShowWave implements Display{
     }
 
     /**
+     * Gets speed of a wave going.
+     *
+     * @return the speed
+     */
+    public int getSpeed() {
+        return speed;
+    }
+
+    /**
      * Sets current wave.
      *
      * @param wave the wave

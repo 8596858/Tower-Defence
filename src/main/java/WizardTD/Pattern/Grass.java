@@ -12,9 +12,8 @@ public class Grass extends Pattern{
      *
      * @param x   the x coordinate
      * @param y   the y coordinate
-     * @param app the main app
      */
-    public Grass(int x, int y, App app) {
-        super(x, y, app, "grass.png");
+    public Grass(int x, int y) {
+        super(x, y, "grass.png");
     }
 }

@@ -83,7 +83,6 @@ public abstract class Monster implements Display, Effect {
      */
     public Monster(Path path, String type, App app, JSONObject jsonObject) {
         this.type = type;
-        this.setImage(app);
         this.startentPath = path;
         this.currentPath = path;
         if (path.getX() == 0) {
@@ -115,7 +114,11 @@ public abstract class Monster implements Display, Effect {
         this.armour = jsonObject.getDouble("armour");
         this.manaGainedOnKill = jsonObject.getDouble("mana_gained_on_kill");
         this.die = false;
-        this.index = app.random.nextInt(currentPath.getParent().size());
+        if (currentPath != null) {
+            if (currentPath.getParent().size() > 0) {
+                this.index = app.random.nextInt(currentPath.getParent().size());
+            }
+        }
     }
 
     /**
@@ -158,34 +161,44 @@ public abstract class Monster implements Display, Effect {
     }
 
     /**
-     * @return the type of monster.
+     * Get the type of monster
+     *
+     * @return the type.
      */
     public String getType() {
         return this.type;
     }
 
     /**
-     * @return the hp of the monster.
+     * Get the hp of the monster
+     *
+     * @return the hp.
      */
     public double getHp() {
         return this.hp;
     }
 
     /**
-     * @return the top hp of the monster.
+     * Get the top hp of the monster
+     *
+     * @return the top hp.
      */
     public double getTopHp() {
         return topHp;
     }
 
     /**
-     * @return the mana gained on killing the monster
+     * Get the mana gained on killing the monster
+     *
+     * @return the mana
      */
     public double getManaGainedOnKill() {
         return this.manaGainedOnKill;
     }
 
     /**
+     * Get the monster's living state.
+     *
      * @return the monster's living state.
      */
     public boolean isDie() {
@@ -193,6 +206,8 @@ public abstract class Monster implements Display, Effect {
     }
 
     /**
+     * Get the x coordinate of monster
+     *
      * @return the x coordinate of monster.
      */
     public float getX() {
@@ -200,13 +215,24 @@ public abstract class Monster implements Display, Effect {
     }
 
     /**
-     * @return the y coordinate of monster.
+     * Get the y coordinate of monster
+     *
+     * @return the y coordinate.
      */
     public float getY() {
         return y;
     }
 
-//    public void attack(App app) {
+    /**
+     * Get the speed of monster
+     *
+     * @return the speed.
+     */
+    public float getSpeed() {
+        return speed;
+    }
+
+    //    public void attack(App app) {
 //        if (Math.abs(this.x - app.wizardHouse.getX() * App.CELLSIZE + App.TOPBAR) < )
 //    }
 
@@ -219,21 +245,6 @@ public abstract class Monster implements Display, Effect {
     public void draw(App app) {
         app.image(this.image, (float)y + (float) (App.CELLSIZE - this.image.width) / 2, (float)x + (float) (App.CELLSIZE - this.image.height) / 2);
     }
-
-//    private void move() {
-//        if (currentPath.getDirection() == 0) {
-//            this.x += speed;
-//        }
-//        else if (currentPath.getDirection() == 1) {
-//            this.x -= speed;
-//        }
-//        else if (currentPath.getDirection() == 2) {
-//            this.y += speed;
-//        }
-//        else if (currentPath.getDirection() == 3) {
-//            this.y -= speed;
-//        }
-//    }
 
     /**
      * The motion of monster.
@@ -314,8 +325,6 @@ public abstract class Monster implements Display, Effect {
         else if (currentPath.getDirection().get(index) == 3) {
             this.y -= speed;
         }
-        this.draw(app);
-        this.displayRect(app);
     }
 
     /**

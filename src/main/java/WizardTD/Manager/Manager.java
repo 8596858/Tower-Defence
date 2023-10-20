@@ -35,4 +35,6 @@ public abstract class Manager <T>{
      * @param app the app
      */
     public abstract void generate(App app);
+
+    public abstract void drawElement(App app);
 }
