@@ -5,19 +5,19 @@ import WizardTD.FireBall;
 import WizardTD.Pattern.Tower;
 
 /**
- * This class is used to manage the fireballs
+ * This class is used to manage the fireballs.
  */
 public class FireBallManager extends Manager<FireBall>{
 
     /**
-     * Constructor. instantiates a new fireball manager.
+     * Constructor: instantiates a new fireball manager.
      */
     public FireBallManager() {
         super();
     }
 
     /**
-     * This method identify if the fireballs have to move or finish
+     * This method identify if the fireballs have to move or finish.
      */
     @Override
     public void update(App app) {
@@ -33,7 +33,7 @@ public class FireBallManager extends Manager<FireBall>{
     }
 
     /**
-     * This method is used to generate the fireballs base on the info provided by towers
+     * This method is used to generate the fireballs base on the info provided by towers.
      */
     @Override
     public void generate(App app) {
@@ -57,8 +57,11 @@ public class FireBallManager extends Manager<FireBall>{
         }
     }
 
+    /**
+     * Draw the fireballs in the map.
+     */
     @Override
-    public void drawElement(App app) {
+    public void drawElement(App app, ShapeManager shapeManager) {
         for (FireBall fireBall : list) {
             fireBall.draw(app);
         }

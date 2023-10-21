@@ -3,7 +3,7 @@ package WizardTD.Pattern;
 import WizardTD.App;
 
 /**
- * The type Shrub .
+ * The type Shrub.
  */
 public class Shrub extends Pattern{
     /**

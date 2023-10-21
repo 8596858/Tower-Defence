@@ -5,7 +5,7 @@ import WizardTD.App;
 import java.util.ArrayList;
 
 /**
- * This abstract class is used to extend other management classes
+ * This abstract class is used to extend other management classes.
  *
  * @param <T> the type parameter
  */
@@ -23,18 +23,18 @@ public abstract class Manager <T>{
     }
 
     /**
-     * This abstract method is used to update the list
+     * This abstract method is used to update the list.
      *
      * @param app the app
      */
     public abstract void update(App app);
 
     /**
-     * This abstract method is used to generate the node in the list
+     * This abstract method is used to generate the node in the list.
      *
      * @param app the app
      */
     public abstract void generate(App app);
 
-    public abstract void drawElement(App app);
+    public abstract void drawElement(App app, ShapeManager shapeManager);
 }

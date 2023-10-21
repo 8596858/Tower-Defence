@@ -18,7 +18,7 @@ public class Pause extends Button{
     }
 
     /**
-     * create the function of "P" button
+     * create the function of "P" button, pause game.
      */
     @Override
     public void clickButton(App app) {

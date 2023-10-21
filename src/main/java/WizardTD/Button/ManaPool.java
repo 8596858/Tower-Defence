@@ -2,6 +2,10 @@ package WizardTD.Button;
 
 import WizardTD.App;
 import WizardTD.JsonInfo;
+import WizardTD.Manager.Shape;
+import WizardTD.Manager.ShapeManager;
+import WizardTD.Manager.Text;
+import WizardTD.Manager.TextManager;
 
 /**
  * This class used to define function of "M" button
@@ -66,19 +70,16 @@ public class ManaPool extends Button{
     /**
      * Display the info box beside the "M" button
      *
-     * @param app the app
+     * @param shapeManager the shape manager
+     * @param textManager  the shape manager
      */
-    public void display(App app) {
-        app.stroke(App.WORD_COLOR);
-        app.fill(app.color(255, 255, 255));
-        app.rect(this.x - App.SIDEBAR, this.y, 96, 16);
-        app.fill(App.WORD_COLOR);
-        app.textSize(13);
-        app.text("Cost: " + this.manaPoolSpellCost, this.x - App.SIDEBAR, this.y + 14);
+    public void display(ShapeManager shapeManager, TextManager textManager) {
+        shapeManager.addNewShape(new Shape(this.x - App.SIDEBAR, this.y, 96, 16, 1, App.WORD_COLOR, App.WHITE_COLOR, 1));
+        textManager.addNewText(new Text("Cost: " + this.manaPoolSpellCost, this.x - App.SIDEBAR, this.y + 14, 13, App.WORD_COLOR));
     }
 
     /**
-     * create the function of "M" button
+     * create the function of "M" button, update the mana bar.
      */
     @Override
     public void clickButton(App app) {

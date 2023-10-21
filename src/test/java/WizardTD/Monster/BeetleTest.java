@@ -46,9 +46,6 @@ class BeetleTest{
         app.wizardHouse = new WizardHouse(2, 0);
     }
 
-    /**
-     * Method under test: {@link Beetle#Beetle(Path, App, JSONObject)}
-     */
     @Test
     void testConstructor() {
         Beetle beetle = new Beetle(app.paths.getStartPoints().get(0), app,
@@ -58,9 +55,6 @@ class BeetleTest{
         assertEquals(0, beetle.getY());
     }
 
-    /**
-     * Method under test: {@link Beetle#monsterDie(App)}
-     */
     @Test
     void testMonsterDie() {
         Beetle beetle = new Beetle(app.paths.getStartPoints().get(0), app,
@@ -85,11 +79,9 @@ class BeetleTest{
         assertTrue(beetle.monsterDie(app));
     }
 
-    /**
-     * Method under test: {@link Beetle#move(App)}
-     */
     @Test
     void testMove() {
+        App.IS_ACCELERATE = false;
         Beetle beetle = new Beetle(app.paths.getStartPoints().get(0), app,
                 app.jsonInfo.getWaves().getJSONObject(0).getJSONArray("monsters").getJSONObject(0));
         beetle.move(app);

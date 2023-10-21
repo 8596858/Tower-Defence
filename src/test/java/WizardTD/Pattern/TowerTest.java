@@ -3,6 +3,8 @@ package WizardTD.Pattern;
 import WizardTD.App;
 import WizardTD.JsonInfo;
 import WizardTD.ManaBar;
+import WizardTD.Manager.ShapeManager;
+import WizardTD.Manager.TextManager;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -19,6 +21,8 @@ class TowerTest {
         App.map = app.mapInfo(app.jsonInfo);
         app.towerLevel = new int[3];
         app.manaBar = new ManaBar(0, 0, 0, "", app);
+        app.shapeManager = new ShapeManager();
+        app.textManager = new TextManager();
         app.isUpdateTower = new boolean[3];
         app.isUpdateTower[0] = true;
         app.isUpdateTower[1] = true;
@@ -81,75 +85,27 @@ class TowerTest {
     }
 
     /**
-     * Method under test: {@link Tower#display(App)}
+     * Method under test: {@link Tower#display(App, ShapeManager, TextManager)}
      */
     @Test
-    @Disabled("TODO: Complete this test")
     void testDisplay() {
-        // TODO: Complete this test.
-        //   Reason: R013 No inputs found that don't throw a trivial exception.
-        //   Diffblue Cover tried to run the arrange/act section, but the method under
-        //   test threw
-        //   java.lang.NullPointerException
-        //       at WizardTD.Pattern.Tower.<init>(Tower.java:35)
-        //   See https://diff.blue/R013 to resolve this issue.
-
-        Tower tower = new Tower(2, 3, new App());
-        tower.display(new App());
+        tower.display(app, app.shapeManager, app.textManager);
+        assertEquals(4, app.shapeManager.getShapeList().size());
+        assertEquals(5, app.textManager.getTextList().size());
     }
 
     /**
-     * Method under test: {@link Tower#fillPixels(App)}
+     * Method under test: {@link Tower#fillPixels(ShapeManager)}
      */
     @Test
     @Disabled("TODO: Complete this test")
     void testFillPixels() {
-        // TODO: Complete this test.
-        //   Reason: R013 No inputs found that don't throw a trivial exception.
-        //   Diffblue Cover tried to run the arrange/act section, but the method under
-        //   test threw
-        //   java.lang.NullPointerException
-        //       at WizardTD.Pattern.Tower.<init>(Tower.java:35)
-        //   See https://diff.blue/R013 to resolve this issue.
-
-        Tower tower = new Tower(2, 3, new App());
-        tower.fillPixels(new App());
-    }
-
-    /**
-     * Method under test: {@link Tower#displayRect(App)}
-     */
-    @Test
-    @Disabled("TODO: Complete this test")
-    void testDisplayRect() {
-        // TODO: Complete this test.
-        //   Reason: R013 No inputs found that don't throw a trivial exception.
-        //   Diffblue Cover tried to run the arrange/act section, but the method under
-        //   test threw
-        //   java.lang.NullPointerException
-        //       at WizardTD.Pattern.Tower.<init>(Tower.java:35)
-        //   See https://diff.blue/R013 to resolve this issue.
-
-        Tower tower = new Tower(2, 3, new App());
-        tower.displayRect(new App());
-    }
-
-    /**
-     * Method under test: {@link Tower#displayText(App, int)}
-     */
-    @Test
-    @Disabled("TODO: Complete this test")
-    void testDisplayText() {
-        // TODO: Complete this test.
-        //   Reason: R013 No inputs found that don't throw a trivial exception.
-        //   Diffblue Cover tried to run the arrange/act section, but the method under
-        //   test threw
-        //   java.lang.NullPointerException
-        //       at WizardTD.Pattern.Tower.<init>(Tower.java:35)
-        //   See https://diff.blue/R013 to resolve this issue.
-
-        Tower tower = new Tower(2, 3, new App());
-        tower.displayText(new App(), 1);
+        app.manaBar.setProcess(1000);
+        tower.updateLevel(app.isUpdateTower, app);
+        tower.updateLevel(app.isUpdateTower, app);
+        tower.updateLevel(app.isUpdateTower, app);
+        tower.fillPixels(app.shapeManager);
+        assertEquals(9, app.shapeManager.getShapeList().size());
     }
 }
 

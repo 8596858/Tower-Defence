@@ -15,7 +15,7 @@ public class Level4 extends Button{
     }
 
     /**
-     * create the function of "Level4" button
+     * create the function of "Level4" button, activate the level four game.
      */
     @Override
     public void clickButton(App app) {

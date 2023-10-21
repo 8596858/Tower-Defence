@@ -1,8 +1,7 @@
 package WizardTD;
 
 import WizardTD.Button.*;
-import WizardTD.Manager.FireBallManager;
-import WizardTD.Manager.MonsterManager;
+import WizardTD.Manager.*;
 import WizardTD.Pattern.*;
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -17,162 +16,191 @@ import java.io.*;
 import java.util.*;
 
 /**
- * The type App.
+ * The main App.
+ * This is the class to run the game.
  */
 public class App extends PApplet {
 
     /**
-     * The constant CELLSIZE.
+     * The constant CELLSIZE defines the size of a cell in the map.
      */
     public static final int CELLSIZE = 32;
     /**
-     * The constant SIDEBAR.
+     * The constant SIDEBAR is the width of the bar on the right.
      */
     public static final int SIDEBAR = 120;
     /**
-     * The constant TOPBAR.
+     * The constant TOPBAR is the height of the bar on the top.
      */
     public static final int TOPBAR = 40;
     /**
-     * The constant BOARD_WIDTH.
+     * The constant BOARD_WIDTH is the number of the cell in column and row of the map.
      */
     public static final int BOARD_WIDTH = 20;
 
     /**
-     * The constant WIDTH.
+     * The constant WIDTH is the width of the panel.
      */
     public static int WIDTH = CELLSIZE * BOARD_WIDTH + SIDEBAR;
     /**
-     * The constant HEIGHT.
+     * The constant HEIGHT is the height of the panel.
      */
     public static int HEIGHT = BOARD_WIDTH * CELLSIZE + TOPBAR;
 
     /**
-     * The constant FPS.
+     * The constant FPS: frame per second.
      */
     public static final int FPS = 60;
 
     /**
-     * The constant BAR_COLOR.
+     * The constant BAR_COLOR is the color of the bar.
      */
-    public static int BAR_COLOR = -6724096;
+    public static int BAR_COLOR = 0x873701;
 
     /**
-     * The constant WORD_COLOR.
+     * The constant WORD_COLOR is the color of the text.
      */
-    public static int WORD_COLOR = -16777216;
+    public static int WORD_COLOR = 0x000000;
 
     /**
-     * The constant BUTTON_COLOR.
+     * The constant BUTTON_COLOR is the color of the button when you click it.
      */
-    public static int BUTTON_COLOR = -256;
+    public static int BUTTON_COLOR = 0xf5e105;
 
     /**
-     * The constant PROCESS_COLOR.
+     * The constant PROCESS_COLOR is the color of the mana bar's process.
      */
-    public static int PROCESS_COLOR = -13382401;
+    public static int PROCESS_COLOR = 0x03cffc;
 
     /**
-     * The constant WAVE_INDEX.
+     * The constant WHITE_COLOR is the white color for information field.
+     */
+    public static int WHITE_COLOR = 0xffffff;
+
+    /**
+     * The constant RED_COLOR is the red color for monster's lost hp.
+     */
+    public static int RED_COLOR = 0xfc0303;
+
+    /**
+     * The constant HP_COLOR is the color for the monster's remaining hp.
+     */
+    public static int HP_COLOR = 0x03fc39;
+
+    /**
+     * The constant LEVEL_COLOR1 is the color to show the tower level.
+     */
+    public static int LEVEL_COLOR1 = 0xfc03e3;
+
+    /**
+     * The constant LEVEL2_COLOR is the color to show the tower level..
+     */
+    public static int LEVEL_COLOR2 = 0x03b1fc;
+
+    /**
+     * The constant WAVE_INDEX represent the current wave index.
      */
     public static int WAVE_INDEX = -1;
 
     /**
-     * The constant CURRENT_TIME.
+     * The constant CURRENT_TIME used to calculate the time going.
      */
     public static long CURRENT_TIME = 0;
     /**
-     * The constant PAUSE.
+     * The constant PAUSE indicates whether the game is paused.
      */
     public static boolean PAUSE;
     /**
-     * The constant IN_MENU.
+     * The constant IN_MENU indicates whether the game is in menu state.
      */
     public static boolean IN_MENU;
 
     /**
-     * The constant IS_ACCELERATE.
+     * The constant IS_ACCELERATE indicates whether the game is accelerated.
      */
     public static boolean IS_ACCELERATE;
 
     /**
-     * The constant CAN_BUILD_TOWER.
+     * The constant CAN_BUILD_TOWER indicates whether the player can build a tower.
      */
     public static boolean CAN_BUILD_TOWER;
 
     /**
-     * The Current mana.
-     */
-    public double currentMana;
-
-    /**
-     * The Config path.
+     * The Config path represent the json file we are using.
      */
     public String configPath;
 
     /**
-     * The Random.
+     * The Random is used to generate random number.
      */
     public Random random = new Random();
 
     /**
-     * The Map.
+     * The Map store the information of the map.
      */
     public static char[][] map;
     /**
-     * The Json info.
+     * The JsonInfo store the information the game.
      */
     public JsonInfo jsonInfo;
     /**
-     * The Waves.
+     * The Waves store the info of a wave, include monster, duration, and so on.
      */
     public Wave[] waves;
     /**
-     * The Monster manager.
+     * The MonsterManager is used to manage the monster's generate and update.
      */
     public MonsterManager monsterManager;
     /**
-     * The Fire ball manager.
+     * The FireBallManager is used to manage the fireball's generate and update.
      */
     public FireBallManager fireBallManager;
     /**
-     * The Towers.
+     * The ShapeManager is used to store the shapes that will display in the map.
+     */
+    public ShapeManager shapeManager;
+    /**
+     * The TextManager is used to store the texts that will display in the map.
+     */
+    public TextManager textManager;
+    /**
+     * The Towers stores the tower that built by player.
      */
     public ArrayList<Tower> towers;
     /**
-     * The Button list.
+     * The ButtonList stores the buttons in the game.
      */
     public ButtonList buttonList;
     /**
-     * The Patterns.
+     * The Patterns stores the patterns will display in the map.
      */
     public Pattern[][] patterns;
     /**
-     * The Paths.
+     * The Paths manage the paths in the map.
      */
     public Paths paths;
     /**
-     * The Wizard house.
+     * The WizardHouse is the end point of the monster.
      */
     public WizardHouse wizardHouse;
     /**
-     * The Is update tower.
+     * The isUpdateTower show the player the properties of tower will be updated.
      */
     public boolean[] isUpdateTower;
     /**
-     * The Can update tower.
+     * The Can update tower tell the player if they can update the tower.
      */
     public boolean canUpdateTower;
     /**
-     * The Tower level.
+     * The TowerLevel shows the properties level of the tower that will be built.
      */
     public int[] towerLevel;
     /**
-     * The Mana bar.
+     * The ManaBar manage the properties of the mana bar.
      */
     public ManaBar manaBar;
     /**
-     * The Show wave.
+     * The ShowWave can update the wave info in the up left corner.
      */
     public ShowWave showWave;
 
@@ -225,22 +253,15 @@ public class App extends PApplet {
         }
         monsterManager = new MonsterManager(this);
         fireBallManager = new FireBallManager();
+        shapeManager = new ShapeManager();
+        textManager = new TextManager();
         towers = new ArrayList<>();
         map = mapInfo(jsonInfo);
-        currentMana = jsonInfo.getInitial_mana();
         paths = new Paths();
         buildMap(map, paths);
         paths.findPaths(this);
         // monsterManager.updateTimeInterval(this, 0);
         manaBar = new ManaBar(WIDTH - 250, 5, 30, "MANA", this);
-        // if (waves.length > 1) {
-        // showWave = new ShowWave(15, 25, WAVE_INDEX,
-        // (int)(waves[WAVE_INDEX].getDuration() + waves[WAVE_INDEX +
-        // 1].getPreWavePause()));
-        // }
-        // else {
-        // showWave = new ShowWave(15, 25, WAVE_INDEX, 0);
-        // }
         showWave = new ShowWave(15, 25, WAVE_INDEX, waves[WAVE_INDEX + 1].getPreWavePause());
         buttonList = new ButtonList(jsonInfo);
     }
@@ -274,17 +295,12 @@ public class App extends PApplet {
         return map;
     }
 
-    // private void BuildBar() {
-    // loadPixels();
-    // Bar topBar = new Bar(BAR_COLOR, TOPBAR, WIDTH, HEIGHT, WIDTH, 0, 0);
-    // Bar sideBar = new Bar(BAR_COLOR, HEIGHT - TOPBAR, SIDEBAR, HEIGHT, WIDTH,
-    // TOPBAR, CELLSIZE*BOARD_WIDTH);
-    //// System.out.println(color(51, 204, 255));
-    // topBar.fillPixels(this.pixels);
-    // sideBar.fillPixels(this.pixels);
-    // updatePixels();
-    // }
-
+    /**
+     * Build map of the game base on the level txt file.
+     *
+     * @param map   the map store the map info
+     * @param paths the paths will store thr start points of the monster
+     */
     public void buildMap(char[][] map, Paths paths) {
         patterns = new Pattern[20][20];
 
@@ -313,7 +329,11 @@ public class App extends PApplet {
                 if (patterns[i][j].getImage() == null) {
                     patterns[i][j].setImage(this);
                 }
-                patterns[i][j].fillPixels(this);
+                if (!patterns[i][j].getType().matches("wizard_house.png")) {
+                    image(patterns[i][j].getImage(),
+                            patterns[i][j].getY() * CELLSIZE,
+                            patterns[i][j].getX() * CELLSIZE + TOPBAR);
+                }
             }
         }
     }
@@ -323,29 +343,6 @@ public class App extends PApplet {
      */
     @Override
     public void keyPressed(KeyEvent key) {
-        if (key.getKey() == 'p') {
-            buttonList.getButtons()[1].clickButton(this);
-        }
-        if (!PAUSE) {
-            if (key.getKey() == 'f') {
-                buttonList.getButtons()[0].clickButton(this);
-            }
-            if (key.getKey() == 't') {
-                buttonList.getButtons()[2].clickButton(this);
-            }
-            if (key.getKey() == '1') {
-                buttonList.getButtons()[3].clickButton(this);
-            }
-            if (key.getKey() == '2') {
-                buttonList.getButtons()[4].clickButton(this);
-            }
-            if (key.getKey() == '3') {
-                buttonList.getButtons()[5].clickButton(this);
-            }
-            if (key.getKey() == 'm') {
-                buttonList.getButtons()[6].clickButton(this);
-            }
-        }
         if (key.getKey() == 'r') {
             if (manaBar.getProcess() <= 0) {
                 setup();
@@ -361,9 +358,34 @@ public class App extends PApplet {
      */
     @Override
     public void keyReleased() {
-
+        if (this.key == 'p') {
+            buttonList.getButtons()[1].clickButton(this);
+        }
+        if (!PAUSE) {
+            if (this.key == 'f') {
+                buttonList.getButtons()[0].clickButton(this);
+            }
+            if (this.key == 't') {
+                buttonList.getButtons()[2].clickButton(this);
+            }
+            if (this.key == '1') {
+                buttonList.getButtons()[3].clickButton(this);
+            }
+            if (this.key == '2') {
+                buttonList.getButtons()[4].clickButton(this);
+            }
+            if (this.key == '3') {
+                buttonList.getButtons()[5].clickButton(this);
+            }
+            if (this.key == 'm') {
+                buttonList.getButtons()[6].clickButton(this);
+            }
+        }
     }
 
+    /**
+     * Receive mouse pressed signal from the mouse, and activate some event.
+     */
     @Override
     public void mousePressed(MouseEvent e) {
         int index = mouseInButton(buttonList.getButtons());
@@ -420,7 +442,6 @@ public class App extends PApplet {
                     patterns[coordinate[0]][coordinate[1]] = new Tower(coordinate[0], coordinate[1], this);
                     towers.add((Tower) patterns[coordinate[0]][coordinate[1]]);
                     patterns[coordinate[0]][coordinate[1]].setImage(this);
-                    patterns[coordinate[0]][coordinate[1]].fillPixels(this);
                     this.addTower = true;
                     CAN_BUILD_TOWER = false;
                     buttonList.getButtons()[2].setUsing(false);
@@ -434,6 +455,9 @@ public class App extends PApplet {
         }
     }
 
+    /**
+     * Receive mouse released signal from the mouse, and activate some event.
+     */
     @Override
     public void mouseReleased(MouseEvent e) {
         int index = mouseInButton(buttonList.getButtons());
@@ -448,7 +472,6 @@ public class App extends PApplet {
                     patterns[coordinate[0]][coordinate[1]] = new Tower(coordinate[0], coordinate[1], this);
                     towers.add((Tower) patterns[coordinate[0]][coordinate[1]]);
                     patterns[coordinate[0]][coordinate[1]].setImage(this);
-                    patterns[coordinate[0]][coordinate[1]].fillPixels(this);
                     this.addTower = true;
                     CAN_BUILD_TOWER = false;
                     buttonList.getButtons()[2].setUsing(false);
@@ -473,8 +496,10 @@ public class App extends PApplet {
         if (IN_MENU) {
             background(BAR_COLOR);
             for (int i = 0; i < 4; i++) {
-                buttonList.getButtons()[i + 7].displayButton(this, color(0, 0, 0));
+                buttonList.getButtons()[i + 7].addShape(this, shapeManager);
+                buttonList.getButtons()[i + 7].addText(this, textManager);
             }
+            displayShapeAndText();
         } else {
             if (!PAUSE) {
                 // background(BAR_COLOR);
@@ -483,31 +508,50 @@ public class App extends PApplet {
                 }
                 fireBallManager.generate(this);
                 drawMap();
+                for (Tower tower : towers) {
+                    tower.fillPixels(shapeManager);
+                }
                 monsterManager.update(this);
-                monsterManager.drawElement(this);
+                monsterManager.drawElement(this, shapeManager);
                 if (manaBar.getProcess() <= Tower.TOWER_COST) {
                     buttonList.getButtons()[2].setUsing(false);
                     CAN_BUILD_TOWER = false;
                 }
                 fireBallManager.update(this);
-                fireBallManager.drawElement(this);
+                fireBallManager.drawElement(this, shapeManager);
+                displayShapeAndText();
                 drawBar();
                 if (mouseInMap()) {
                     displayTowerRange(mouseY, mouseX);
                 }
                 if (mouseInButton(buttonList.getButtons()) == 6) {
-                    ((ManaPool) buttonList.getButtons()[6]).display(this);
+                    ((ManaPool) buttonList.getButtons()[6]).display(shapeManager, textManager);
                 }
                 if (mouseInButton(buttonList.getButtons()) == 2) {
-                    ((PutTower) buttonList.getButtons()[2]).display(this);
+                    ((PutTower) buttonList.getButtons()[2]).display(shapeManager, textManager);
                 }
                 if (WAVE_INDEX < waves.length - 1) {
-                    showWave.displayText(this, WORD_COLOR);
+                    showWave.addText(this, textManager);
                 }
                 manaBar.updateProcess(addTower);
                 this.addTower = false;
-                manaBar.display(this, WORD_COLOR);
-                wizardHouse.fillPixels(this);
+                manaBar.display(this, shapeManager, textManager);
+                BufferedImage bufferedImage = (BufferedImage) wizardHouse.getImage().getNative();
+                loadPixels();
+                for (int k = 0; k < bufferedImage.getHeight() && k + CELLSIZE * wizardHouse.getX() + (CELLSIZE - bufferedImage.getHeight()) / 2 + TOPBAR < HEIGHT; k++) {
+                    for (int l = 0; l < bufferedImage.getWidth() && l + CELLSIZE * wizardHouse.getY() + (CELLSIZE - bufferedImage.getWidth()) / 2 < WIDTH - SIDEBAR; l++) {
+                        if (bufferedImage.getRGB(l, k) != 0 && bufferedImage.getRGB(l, k) != -16777216) {
+                            pixels[(TOPBAR + wizardHouse.getX() * CELLSIZE + (CELLSIZE - bufferedImage.getHeight()) / 2) * App.WIDTH
+                                    + k * WIDTH + (wizardHouse.getY() * CELLSIZE + (CELLSIZE - bufferedImage.getWidth()) / 2) + l] = bufferedImage.getRGB(l, k);
+                        }
+                    }
+                }
+                updatePixels();
+                for (int i = 0; i < 7; i++) {
+                    buttonList.getButtons()[i].addShape(this, shapeManager);
+                    buttonList.getButtons()[i].addText(this, textManager);
+                }
+                displayShapeAndText();
             }
             if (manaBar.getProcess() <= 0) {
                 fill(color(0, 255, 0));
@@ -524,33 +568,55 @@ public class App extends PApplet {
                 text("YOU WIN", (float) ((BOARD_WIDTH - 7) * CELLSIZE) / 2, 5 * CELLSIZE + TOPBAR);
                 PAUSE = true;
             }
-            for (int i = 0; i < 7; i++) {
-                buttonList.getButtons()[i].displayButton(this, color(0, 0, 0));
-            }
         }
 
     }
 
+    /**
+     * Display the shape and text in the panel.
+     */
+    private void displayShapeAndText() {
+        while (!shapeManager.getShapeList().empty()) {
+            Shape shape = shapeManager.popShape();
+            stroke(color((shape.getStrokeColor()&0xff0000)>>16, (shape.getStrokeColor()&0x00ff00)>>8, shape.getStrokeColor()&0x0000ff));
+            if (shape.getAlpha() == 0) {
+                fill(shape.getFillColor(), 0);
+            }
+            else {
+                fill(color((shape.getFillColor()&0xff0000)>>16, (shape.getFillColor()&0x00ff00)>>8, shape.getFillColor()&0x0000ff));
+            }
+            if (shape.getType() == 1) {
+                rect(shape.getA(), shape.getB(), shape.getC(), shape.getD());
+            }
+            else if (shape.getType() == 2){
+                ellipse(shape.getA(), shape.getB(), shape.getC(), shape.getD());
+            }
+        }
+        while (!textManager.getTextList().empty()) {
+            Text text = textManager.popText();
+            fill(color((text.getColor()&0xff0000)>>16, (text.getColor()&0x00ff00)>>8, text.getColor()&0x0000ff));
+            textSize(text.getSize());
+            text(text.getContent(), text.getX(), text.getY());
+        }
+    }
+
+    /**
+     * Draw the bar in the panel.
+     */
     private void drawBar() {
-        loadPixels();
-        for (int i = 0; i < HEIGHT; i++) {
-            if (i < TOPBAR) {
-                for (int j = 0; j < WIDTH; j++) {
-                    pixels[i * WIDTH + j] = BAR_COLOR;
-                }
-            } else {
-                for (int j = BOARD_WIDTH * CELLSIZE; j < WIDTH; j++) {
-                    pixels[i * WIDTH + j] = BAR_COLOR;
-                }
-            }
-        }
-        updatePixels();
+        stroke(color((BAR_COLOR&0xff0000)>>16, (BAR_COLOR&0x00ff00)>>8, BAR_COLOR&0x0000ff));
+        fill(color((BAR_COLOR&0xff0000)>>16, (BAR_COLOR&0x00ff00)>>8, BAR_COLOR&0x0000ff));
+        rect(0, 0, WIDTH, TOPBAR);
+        rect(20 * CELLSIZE, TOPBAR, SIDEBAR, 20 * CELLSIZE);
     }
 
+    /**
+     * Display the tower range when you place the mouse on the tower.
+     */
     private void displayTowerRange(int x, int y) {
         int[] coordinate = patternCoordinate(x, y);
         if (patterns[coordinate[0]][coordinate[1]].getType().substring(0, 5).matches("tower")) {
-            ((Tower) patterns[coordinate[0]][coordinate[1]]).display(this);
+            ((Tower) patterns[coordinate[0]][coordinate[1]]).display(this, shapeManager, textManager);
         }
     }
 
@@ -564,9 +630,9 @@ public class App extends PApplet {
     }
 
     /**
-     * Mouse in map boolean.
+     * Determine whether the mouse is in the map.
      *
-     * @return the boolean
+     * @return the determine result
      */
     public boolean mouseInMap() {
         return mouseY > TOPBAR && mouseX < WIDTH - SIDEBAR;
@@ -599,11 +665,11 @@ public class App extends PApplet {
     }
 
     /**
-     * Pattern coordinate int [ ].
+     * Calculate the pattern coordinate by the pixel coordinate.
      *
-     * @param x the x position of pattern
-     * @param y the y position of pattern
-     * @return the coordinate
+     * @param x the x coordinate of pixel
+     * @param y the y coordinate of pixel
+     * @return the coordinate of pattern
      */
     public int[] patternCoordinate(int x, int y) {
         int[] result = new int[2];

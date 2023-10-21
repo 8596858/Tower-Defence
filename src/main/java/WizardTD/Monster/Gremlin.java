@@ -23,7 +23,7 @@ public class Gremlin extends Monster {
     }
 
     /**
-     * The process of monster die.
+     * The process of gremlins die.
      *
      * @param app the app
      */

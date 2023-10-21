@@ -21,7 +21,7 @@ public class FasterSpeed extends Button{
     }
 
     /**
-     * create the function of "FF" button
+     * create the function of "FF" button, make the game two times faster.
      */
     @Override
     public void clickButton(App app) {

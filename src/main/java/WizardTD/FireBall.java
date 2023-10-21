@@ -37,7 +37,7 @@ public class FireBall implements Effect{
     }
 
     /**
-     * Is finish boolean.
+     * Determine if the fireball is hitting the monster.
      *
      * @return if the fireball is finish
      */
@@ -58,7 +58,7 @@ public class FireBall implements Effect{
     }
 
     /**
-     * Draw fireball.
+     * Draw fireball in the map.
      *
      * @param app the main app
      */
@@ -71,7 +71,7 @@ public class FireBall implements Effect{
     }
 
     /**
-     * The motion of fireball.
+     * The motion of fireball in the next frame.
      *
      * @param app the main app
      */

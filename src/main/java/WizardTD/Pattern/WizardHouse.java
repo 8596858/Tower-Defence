@@ -5,12 +5,12 @@ import WizardTD.App;
 import java.awt.image.BufferedImage;
 
 /**
- * The type Wizard house.
+ * The type wizard house.
  */
 public class WizardHouse extends Pattern{
 
     /**
-     * Constructor: instantiates a new Wizard house.
+     * Constructor: instantiates a new wizard house.
      *
      * @param x   the x coordinate of wizard house.
      * @param y   the y x coordinate of wizard house.
@@ -19,25 +19,15 @@ public class WizardHouse extends Pattern{
         super(x, y, "wizard_house.png");
     }
 
+    /**
+     * Sets image for the wizard house, and rotate it to the right angle.
+     *
+     * @param app the main app
+     */
     @Override
     public void setImage(App app) {
         this.image = app.loadImage("src/main/resources/WizardTD/" + this.type);
         this.image = app.rotateImageByDegrees(this.image, calculateHouseAngle(App.map, this.x, this.y) * 90);
-    }
-
-    @Override
-    public void fillPixels(App app) {
-        BufferedImage bufferedImage = (BufferedImage) this.image.getNative();
-        app.loadPixels();
-        for (int i = 0; i < bufferedImage.getHeight() && i + App.CELLSIZE * x + (App.CELLSIZE - bufferedImage.getHeight()) / 2 + App.TOPBAR < App.HEIGHT; i++) {
-            for (int j = 0; j < bufferedImage.getWidth() && j + App.CELLSIZE * y + (App.CELLSIZE - bufferedImage.getWidth()) / 2 < App.WIDTH - App.SIDEBAR; j++) {
-                if (bufferedImage.getRGB(j, i) != 0 && bufferedImage.getRGB(j, i) != -16777216) {
-                    app.pixels[(App.TOPBAR + x * App.CELLSIZE + (App.CELLSIZE - bufferedImage.getHeight()) / 2) * App.WIDTH
-                            + i * App.WIDTH + (y * App.CELLSIZE + (App.CELLSIZE - bufferedImage.getWidth()) / 2) + j] = bufferedImage.getRGB(j, i);
-                }
-            }
-        }
-        app.updatePixels();
     }
 
     /**

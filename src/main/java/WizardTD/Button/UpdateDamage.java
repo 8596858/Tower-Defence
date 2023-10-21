@@ -19,7 +19,7 @@ public class UpdateDamage extends Update{
     }
 
     /**
-     * create the function of "U3" button
+     * create the function of "U3" button, update the damage to the tower.
      */
     @Override
     public void clickButton(App app) {

@@ -24,9 +24,6 @@ class PathsTest {
         assertEquals(0, paths.getStartPoints().size());
     }
 
-    /**
-     * Method under test: {@link Paths#setStartPoints(Path)}
-     */
     @Test
     void testSetStartPoints() {
         Path path = new Path(2, 3);
@@ -34,9 +31,6 @@ class PathsTest {
         assertEquals(1, paths.getStartPoints().size());
     }
 
-    /**
-     * Method under test: {@link Paths#findPaths(App)}
-     */
     @Test
     void testFindPaths() {
         paths = new Paths();

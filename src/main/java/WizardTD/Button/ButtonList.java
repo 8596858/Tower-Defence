@@ -32,6 +32,8 @@ public class ButtonList {
     }
 
     /**
+     * Get the buttons.
+     *
      * @return the button array
      */
     public Button[] getButtons() {

@@ -1,21 +1,23 @@
 package WizardTD;
 
+import WizardTD.Manager.ShapeManager;
+import WizardTD.Manager.TextManager;
+
 /**
  * The interface Display.
  */
 public interface Display {
     /**
-     * Display rect.
+     * Add shapes to the shape manager.
      *
-     * @param app the main app
+     * @param shapeManager the shape manager
      */
-    public void displayRect(App app);
+    public void addShape(App app, ShapeManager shapeManager);
 
     /**
-     * Display text.
+     * Add texts to the text manager.
      *
-     * @param app   the main app
-     * @param color the color
+     * @param textManager the text manager
      */
-    public void displayText(App app, int color);
+    public void addText(App app, TextManager textManager);
 }

@@ -4,7 +4,8 @@ import WizardTD.App;
 import processing.core.PImage;
 
 /**
- * The type Pattern.
+ * The type Pattern that will display in the map.
+ * It has five child class: Grass, Path, Shrub, Tower, and WizardHouse.
  */
 public abstract class Pattern {
     /**
@@ -89,14 +90,5 @@ public abstract class Pattern {
      */
     public PImage getImage() {
         return image;
-    }
-
-    /**
-     * Fill pixels in the map with the pattern image.
-     *
-     * @param app the main app
-     */
-    public void fillPixels(App app) {
-        app.image(this.image, y * App.CELLSIZE, x * App.CELLSIZE + App.TOPBAR);
     }
 }

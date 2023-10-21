@@ -2,6 +2,10 @@ package WizardTD.Button;
 
 import WizardTD.App;
 import WizardTD.Display;
+import WizardTD.Manager.Shape;
+import WizardTD.Manager.ShapeManager;
+import WizardTD.Manager.Text;
+import WizardTD.Manager.TextManager;
 
 /**
  * This abstract class is used to extend different kind of buttons.
@@ -43,8 +47,8 @@ public abstract class Button implements Display {
     /**
      * Constructor: instantiates a new button.
      *
-     * @param x        the x coordinate
-     * @param y        the y coordinate
+     * @param x        the x coordinate of button
+     * @param y        the y coordinate of button
      * @param size     the size of button
      * @param label    the label of button
      * @param describe the description of button
@@ -59,7 +63,7 @@ public abstract class Button implements Display {
     }
 
     /**
-     * Gets x coordinate.
+     * Gets x coordinate of button.
      *
      * @return the value of x coordinate
      */
@@ -68,7 +72,7 @@ public abstract class Button implements Display {
     }
 
     /**
-     * Gets y coordinate.
+     * Gets y coordinate of button.
      *
      * @return the value of y coordinate
      */
@@ -158,50 +162,37 @@ public abstract class Button implements Display {
     }
 
     /**
-     * This method used to display the shape of the button
+     * This method used to add the shapes to the shape manager that will display in the panel.
      */
     @Override
-    public void displayRect(App app) {
-        app.stroke(App.WORD_COLOR);
+    public void addShape(App app, ShapeManager shapeManager) {
+        int fillColor = 0;
         if (isUsing) {
-            app.fill(App.BUTTON_COLOR);
+            fillColor = App.BUTTON_COLOR;
         }
         else if (app.mouseInButton(app.buttonList.getButtons()) != -1) {
-            if (app.buttonList.getButtons()[app.mouseInButton(app.buttonList.getButtons())].getLabel().matches(this.label)) {
-                app.fill(app.color(130, 130, 130));
+            if (app.buttonList.getButtons()[app.mouseInButton(app.buttonList.getButtons())].getLabel().matches(this.label) && !App.PAUSE) {
+                fillColor = 0x828282;
             }
             else {
-                app.fill(App.BAR_COLOR);
+                fillColor = App.BAR_COLOR;
             }
         }
         else {
-            app.fill(App.BAR_COLOR);
+            fillColor = App.BAR_COLOR;
         }
-        app.rect(this.getX(), this.getY(), this.getSize(), this.getSize());
+        shapeManager.addNewShape(new Shape(this.getX(), this.getY(), this.getSize(), this.getSize(), 1, App.WORD_COLOR, fillColor, 1));
     }
 
     /**
-     * This method used to display the text info of the button
+     * This method used to add the texts to the text manager that will display in the panel.
      */
     @Override
-    public void displayText(App app, int color) {
-        app.fill(App.WORD_COLOR);
-        app.textSize(20);
-        app.text(this.getLabel(), this.getX() + (float) this.getSize() / 4f, this.getY() + (float) this.getSize() / 2f);
-        app.textSize(10);
-        app.text(this.getDescribe(), this.getX() + (float) this.getSize() * 1.1f, this.getY() + (float) this.getSize() / 2f);
-    }
-
-    /**
-     * This method used to display the button
-     * Every button is the same
-     *
-     * @param app       the main app
-     * @param wordColor the word color
-     */
-    public void displayButton(App app, int wordColor) {
-        displayRect(app);
-        displayText(app, wordColor);
+    public void addText(App app, TextManager textManager) {
+        textManager.addNewText(new Text(this.getLabel(), this.getX() + this.getSize() / 4,
+                this.getY() + this.getSize() / 2,20, App.WORD_COLOR));
+        textManager.addNewText(new Text(this.getDescribe(), this.getX() + this.getSize(),
+                this.getY() + this.getSize() / 2,10, App.WORD_COLOR));
     }
 
     /**

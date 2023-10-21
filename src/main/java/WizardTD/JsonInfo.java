@@ -57,7 +57,7 @@ public class JsonInfo {
     }
 
     /**
-     * Gets layout.
+     * Gets layout of a level of game.
      *
      * @return the layout
      */
@@ -66,7 +66,7 @@ public class JsonInfo {
     }
 
     /**
-     * Gets waves.
+     * Gets waves in the game.
      *
      * @return the waves
      */
@@ -102,7 +102,7 @@ public class JsonInfo {
     }
 
     /**
-     * Gets initial mana.
+     * Gets initial mana in the mana pool.
      *
      * @return the initial mana
      */
@@ -111,7 +111,7 @@ public class JsonInfo {
     }
 
     /**
-     * Gets initial mana cap.
+     * Gets initial mana cap of the mana pool.
      *
      * @return the initial mana cap
      */
@@ -129,7 +129,7 @@ public class JsonInfo {
     }
 
     /**
-     * Gets tower cost.
+     * Gets initial tower cost.
      *
      * @return the tower cost
      */

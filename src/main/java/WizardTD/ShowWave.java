@@ -1,14 +1,17 @@
 package WizardTD;
 
+import WizardTD.Manager.ShapeManager;
+import WizardTD.Manager.Text;
+import WizardTD.Manager.TextManager;
+
 /**
- * The type Show wave.
+ * The type show wave.
  */
 public class ShowWave implements Display{
     private int x;
     private int y;
     private int wave;
     private double duration;
-    private int timer;
     private int speed;
 
     /**
@@ -24,7 +27,6 @@ public class ShowWave implements Display{
         this.y = y;
         this.wave = wave;
         this.duration = duration;
-        this.timer = 0;
         this.speed = 1;
     }
 
@@ -73,16 +75,26 @@ public class ShowWave implements Display{
         this.speed = speed;
     }
 
+    /**
+     * Add the shape the represent the wave into the shape manager.
+     *
+     * @param app the app
+     * @param shapeManager the shape manager
+     */
     @Override
-    public void displayRect(App app) {
+    public void addShape(App app, ShapeManager shapeManager) {
 
     }
 
+    /**
+     * Add the text the represent the index and remaining duration of the wave into the text manager.
+     *
+     * @param app the app
+     * @param textManager the text manager
+     */
     @Override
-    public void displayText(App app, int color) {
-        app.fill(app.color(color));
-        app.textSize(20);
-        app.text("Wave " + (this.wave + 2) + " " + "Start " + (int)this.duration, this.x, this.y);
+    public void addText(App app, TextManager textManager) {
+        textManager.addNewText(new Text("Wave " + (this.wave + 2) + " " + "Start " + (int)this.duration, this.x, this.y, 20, App.WORD_COLOR));
         this.duration = this.duration - 1 / (double)App.FPS * this.speed;
     }
 }

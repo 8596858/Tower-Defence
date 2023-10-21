@@ -1,6 +1,10 @@
 package WizardTD.Button;
 
 import WizardTD.App;
+import WizardTD.Manager.Shape;
+import WizardTD.Manager.ShapeManager;
+import WizardTD.Manager.Text;
+import WizardTD.Manager.TextManager;
 import WizardTD.Pattern.Tower;
 
 /**
@@ -19,21 +23,18 @@ public class PutTower extends Button {
     }
 
     /**
-     * Display the info box beside the "T" button
+     * Put the shape and text that show the cost of tower into the manager.
      *
-     * @param app the app
+     * @param shapeManager the shape manager
+     * @param textManager  the text manager
      */
-    public void display(App app) {
-        app.stroke(App.WORD_COLOR);
-        app.fill(app.color(255, 255, 255));
-        app.rect(this.x - App.SIDEBAR, this.y, 96, 16);
-        app.fill(App.WORD_COLOR);
-        app.textSize(13);
-        app.text("Cost: " + Tower.TOWER_COST, this.x - App.SIDEBAR, this.y + 14);
+    public void display(ShapeManager shapeManager, TextManager textManager) {
+        shapeManager.addNewShape(new Shape(this.x - App.SIDEBAR, this.y, 96, 16, 1, App.WORD_COLOR, App.WHITE_COLOR, 1));
+        textManager.addNewText(new Text("Cost: " + Tower.TOWER_COST, this.x - App.SIDEBAR, this.y + 14, 13, App.WORD_COLOR));
     }
 
     /**
-     * create the function of "T" button
+     * create the function of "T" button, put tower in the map.
      */
     @Override
     public void clickButton(App app) {

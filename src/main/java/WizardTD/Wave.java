@@ -32,7 +32,7 @@ public class Wave {
     }
 
     /**
-     * Gets pre wave pause.
+     * Gets the time that the wave have to wait after the monster manager finish generate the monster.
      *
      * @return the pre wave pause
      */

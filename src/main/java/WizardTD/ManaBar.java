@@ -1,6 +1,10 @@
 package WizardTD;
 
 import WizardTD.Button.ManaPool;
+import WizardTD.Manager.Shape;
+import WizardTD.Manager.ShapeManager;
+import WizardTD.Manager.Text;
+import WizardTD.Manager.TextManager;
 import WizardTD.Monster.Monster;
 import WizardTD.Pattern.Tower;
 
@@ -15,10 +19,9 @@ public class ManaBar implements Display{
     private float process;
     private float gainedSpeed;
     private String label;
-    private long currTime;
 
     /**
-     * Constructor: instantiates a new Mana bar.
+     * Constructor: instantiates a new mana bar.
      *
      * @param x     the x coordinate of mana bar.
      * @param y     the y coordinate of mana bar.
@@ -34,7 +37,6 @@ public class ManaBar implements Display{
         this.process = (float)app.jsonInfo.getInitial_mana();
         this.gainedSpeed = (float)app.jsonInfo.getInitial_mana_gained_per_second();
         this.manaCap = (float)app.jsonInfo.getInitial_mana_cap();
-        this.currTime = System.currentTimeMillis();
     }
 
     /**
@@ -65,7 +67,7 @@ public class ManaBar implements Display{
     }
 
     /**
-     * Gets mana cap.
+     * Gets mana cap of mana bar.
      *
      * @return the mana cap
      */
@@ -171,34 +173,42 @@ public class ManaBar implements Display{
         this.process = this.process - manaPool.getManaPoolSpellCost();
     }
 
+    /**
+     * Add the shape the represent the remaining and cap of the mana into the shape manager.
+     *
+     * @param app the app
+     * @param shapeManager the shape manager
+     */
     @Override
-    public void displayRect(App app) {
-        app.stroke(app.color(App.WORD_COLOR));
-        app.fill(app.color(255, 255, 255));
-        app.rect(this.getX(), this.getY(), 200, this.getWidth());
+    public void addShape(App app, ShapeManager shapeManager) {
         if (this.getProcess() >= 0) {
-            app.fill(App.PROCESS_COLOR);
-            app.rect(this.getX(), this.getY(), this.getProcess() / this.getManaCap() * 200, this.getWidth());
+            shapeManager.addNewShape(new Shape(this.getX(), this.getY(), this.getProcess() / this.getManaCap() * 200, this.getWidth(),
+                    1, App.WORD_COLOR, App.PROCESS_COLOR, 1));
         }
-    }
-
-    @Override
-    public void displayText(App app, int color) {
-        app.fill(App.WORD_COLOR);
-        app.textSize(15);
-        app.text(this.getLabel(), this.getX() - 50, this.getY() + 20);
-        app.textSize(10);
-        app.text(String.format("%.0f", this.getProcess()) + "/" + String.format("%.0f", this.getManaCap()), this.getX() + this.getManaCap() * 0.06f, this.getY() + this.getWidth() / 1.5f);
+        shapeManager.addNewShape(new Shape(this.getX(), this.getY(), 200, this.getWidth(),
+                1, App.WORD_COLOR, App.WHITE_COLOR, 1));
     }
 
     /**
-     * Display.
+     * Add the text the represent the remaining and cap of the mana into the text manager.
      *
-     * @param app       the main app
-     * @param wordColor the word color
+     * @param app the app
+     * @param textManager the text manager
      */
-    public void display(App app, int wordColor) {
-        displayRect(app);
-        displayText(app, wordColor);
+    @Override
+    public void addText(App app, TextManager textManager) {
+        textManager.addNewText(new Text(this.getLabel(), this.getX() - 50, this.getY() + 20, 15, App.WORD_COLOR));
+        textManager.addNewText(new Text(String.format("%.0f", this.getProcess()) + "/" + String.format("%.0f", this.getManaCap()), this.getX() + this.getManaCap() * 0.06f, this.getY() + this.getWidth() / 1.5f, 10, App.WORD_COLOR));
+    }
+
+    /**
+     * Add the shapes and texts into the manager.
+     *
+     * @param app           the main app
+     * @param shapeManager  the shape manager
+     */
+    public void display(App app, ShapeManager shapeManager, TextManager textManager) {
+        addShape(app, shapeManager);
+        addText(app, textManager);
     }
 }

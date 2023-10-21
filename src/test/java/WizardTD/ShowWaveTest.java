@@ -2,7 +2,7 @@ package WizardTD;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.jupiter.api.Disabled;
+import WizardTD.Manager.TextManager;
 import org.junit.jupiter.api.Test;
 
 class ShowWaveTest {
@@ -14,9 +14,6 @@ class ShowWaveTest {
         assertEquals(1, showWave.getSpeed());
     }
 
-    /**
-     * Method under test: {@link ShowWave#displayText(App, int)}
-     */
     @Test
     void testSetter() {
         showWave.setWave(2);
@@ -24,6 +21,14 @@ class ShowWaveTest {
         showWave.setDuration(20);
         assertEquals(20, showWave.getDuration());
         assertEquals(2, showWave.getSpeed());
+    }
+
+    @Test
+    void tetAssText() {
+        App app = new App();
+        app.textManager = new TextManager();
+        showWave.addText(app, app.textManager);
+        assertEquals(1, app.textManager.getTextList().size());
     }
 }
 

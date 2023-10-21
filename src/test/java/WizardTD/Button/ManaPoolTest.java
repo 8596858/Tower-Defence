@@ -2,6 +2,8 @@ package WizardTD.Button;
 
 import WizardTD.App;
 import WizardTD.JsonInfo;
+import WizardTD.Manager.ShapeManager;
+import WizardTD.Manager.TextManager;
 import WizardTD.ManaBar;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -11,15 +13,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class ManaPoolTest {
     ManaPool manaPool = new ManaPool(2, 3, 3, new JsonInfo("config.json"));
 
-    /**
-     * Methods under test:
-     *
-     * <ul>
-     *   <li>{@link ManaPool#getManaPoolSpellCapMultiplier()}
-     *   <li>{@link ManaPool#getManaPoolSpellCost()}
-     *   <li>{@link ManaPool#getManaPoolSpellGainedMultiplier()}
-     * </ul>
-     */
     @Test
     void testGetter() {
         assertEquals(1.1d, manaPool.getManaPoolSpellGainedMultiplier());
@@ -38,13 +31,16 @@ class ManaPoolTest {
     }
 
     /**
-     * Method under test: {@link ManaPool#display(App)}
+     * Method under test: {@link ManaPool#display(ShapeManager, TextManager)}
      */
     @Test
-    @Disabled("TODO: Complete this test")
     void testDisplay() {
-        ManaPool manaPool = new ManaPool(2, 3, 3, new JsonInfo("config.json"));
-        manaPool.display(new App());
+        ManaPool manaPool = new ManaPool(1, 1, 2, new JsonInfo("config.json"));
+        ShapeManager shapeManager = new ShapeManager();
+        TextManager textManager = new TextManager();
+        manaPool.display(shapeManager, textManager);
+        assertEquals(1, shapeManager.getShapeList().size());
+        assertEquals(1, textManager.getTextList().size());
     }
 
     /**

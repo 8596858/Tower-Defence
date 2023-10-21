@@ -2,6 +2,10 @@ package WizardTD.Pattern;
 
 import WizardTD.App;
 import WizardTD.Display;
+import WizardTD.Manager.Shape;
+import WizardTD.Manager.ShapeManager;
+import WizardTD.Manager.Text;
+import WizardTD.Manager.TextManager;
 
 /**
  * The type Tower.
@@ -36,42 +40,6 @@ public class Tower extends Pattern implements Display {
         this.level[1] = app.towerLevel[1];
         this.level[2] = app.towerLevel[2];
         updateTower(app);
-    }
-
-    /**
-     * Sets cost.
-     *
-     * @param cost the cost
-     */
-    public void setCost(int cost) {
-        this.TOWER_COST = cost;
-    }
-
-    /**
-     * Sets damage.
-     *
-     * @param damage the damage
-     */
-    public void setDamage(double damage) {
-        this.damage = damage;
-    }
-
-    /**
-     * Sets firing speed.
-     *
-     * @param speed the speed
-     */
-    public void setFiringSpeed(double speed) {
-        firingSpeed = speed;
-    }
-
-    /**
-     * Sets range.
-     *
-     * @param range the range
-     */
-    public void setRange(double range) {
-        this.range = range;
     }
 
     /**
@@ -217,74 +185,89 @@ public class Tower extends Pattern implements Display {
      * Display the tower on the map.
      *
      * @param app the app
+     * @param shapeManager the shape manager
+     * @param textManager the text manager
      */
-    public void display(App app) {
-        app.stroke(App.BUTTON_COLOR);
-        app.fill(app.color(0, 0, 0), 0);
-        app.ellipse(this.y * App.CELLSIZE + (float) App.CELLSIZE / 2, this.x * App.CELLSIZE + (float) App.CELLSIZE / 2 + App.TOPBAR, (float) this.range * 2, (float) this.range * 2);
+    public void display(App app, ShapeManager shapeManager, TextManager textManager) {
+        shapeManager.addNewShape(new Shape(this.y * App.CELLSIZE + (float) App.CELLSIZE / 2, this.x * App.CELLSIZE + (float) App.CELLSIZE / 2 + App.TOPBAR,
+                (float) this.range * 2, (float) this.range * 2, 2, App.BUTTON_COLOR, 0, 0));
         if (!(level[0] == 3 && level[1] == 3 && level[2] == 3) && (app.isUpdateTower[0] || app.isUpdateTower[1] || app.isUpdateTower[2])) {
-            displayRect(app);
-            displayText(app, 0);
+            addShape(app, shapeManager);
+            addText(app, textManager);
         }
     }
 
-    @Override
-    public void fillPixels(App app) {
-        app.image(this.image, y * App.CELLSIZE, x * App.CELLSIZE + App.TOPBAR);
+    /**
+     * Add the shape that display the level of the tower into the shape manager.
+     *
+     * @param shapeManager the shape manager
+     */
+    public void fillPixels(ShapeManager shapeManager) {
         if (!(this.level[0] == 1 && this.level[1] == 1 && this.level[2] == 1) &&
                 !(this.level[0] == 2 && this.level[1] == 2 && this.level[2] == 2)) {
-            app.stroke(app.color(252, 3, 227));
-            app.fill(0,0);
             for (int i = 0; i < level[0]; i++) {
-                app.ellipse(this.y * App.CELLSIZE + i * 4, this.x * App.CELLSIZE + App.TOPBAR, 4, 4);
+                shapeManager.addNewShape(new Shape(this.y * App.CELLSIZE + i * 4, this.x * App.CELLSIZE + App.TOPBAR,
+                        4, 4, 2, App.LEVEL_COLOR1, 0, 0));
             }
             for (int i = 0; i < level[2]; i++) {
-                app.ellipse(this.y * App.CELLSIZE + i * 4, this.x * App.CELLSIZE + App.TOPBAR + App.CELLSIZE - 2, 4, 4);
+                shapeManager.addNewShape(new Shape(this.y * App.CELLSIZE + i * 4, this.x * App.CELLSIZE + App.TOPBAR + App.CELLSIZE - 2,
+                        4, 4, 2, App.LEVEL_COLOR1, 0, 0));
             }
-            app.stroke(app.color(3, 177, 252));
             for (int i = 0; i < level[1]; i++) {
-                app.rect(this.y * App.CELLSIZE + i + 4, this.x * App.CELLSIZE + App.TOPBAR + i + 4, App.CELLSIZE - (4 + i) * 2, App.CELLSIZE - (4 + i) * 2);
+                shapeManager.addNewShape(new Shape(this.y * App.CELLSIZE + i + 4, this.x * App.CELLSIZE + App.TOPBAR + i + 4,
+                        App.CELLSIZE - (4 + i) * 2, App.CELLSIZE - (4 + i) * 2, 1, App.LEVEL_COLOR2, 0, 0));
             }
         }
     }
 
+    /**
+     * Add the shape that display the update info of the tower to the shape manager.
+     *
+     * @param app the app
+     * @param shapeManager the shape manager
+     */
     @Override
-    public void displayRect(App app) {
-        app.stroke(App.WORD_COLOR);
-        app.fill(app.color(255, 255, 255));
-        app.rect(App.BOARD_WIDTH * App.CELLSIZE + 10, 17 * App.CELLSIZE, 96, 16);
+    public void addShape(App app, ShapeManager shapeManager) {
+        shapeManager.addNewShape(new Shape(App.BOARD_WIDTH * App.CELLSIZE + 10, 17 * App.CELLSIZE,
+                96, 16, 1, App.WORD_COLOR, App.WHITE_COLOR, 1));
         int h = 0;
         for (int i = 0; i < 3; i++) {
             if (app.isUpdateTower[i] && level[i] < 3) {
                 h += 16;
             }
         }
-        app.rect(App.BOARD_WIDTH * App.CELLSIZE + 10, 17 * App.CELLSIZE + 16, 96, h);
-        app.rect(App.BOARD_WIDTH * App.CELLSIZE + 10, 17 * App.CELLSIZE + 16 + h, 96, 16);
+        shapeManager.addNewShape(new Shape(App.BOARD_WIDTH * App.CELLSIZE + 10, 17 * App.CELLSIZE + 16,
+                96, h, 1, App.WORD_COLOR, App.WHITE_COLOR, 1));
+        shapeManager.addNewShape(new Shape(App.BOARD_WIDTH * App.CELLSIZE + 10, 17 * App.CELLSIZE + 16 + h,
+                96, 16, 1, App.WORD_COLOR, App.WHITE_COLOR, 1));
     }
 
+    /**
+     * Add the text that display the update info of the tower to the text manager.
+     *
+     * @param app the app
+     * @param textManager the text manager
+     */
     @Override
-    public void displayText(App app, int color) {
-        app.fill(App.WORD_COLOR);
-        app.textSize(13);
-        app.text("Upgrade Cost", App.BOARD_WIDTH * App.CELLSIZE + 12, 17 * App.CELLSIZE + 14);
+    public void addText(App app, TextManager textManager) {
+        textManager.addNewText(new Text("Upgrade Cost", App.BOARD_WIDTH * App.CELLSIZE + 12, 17 * App.CELLSIZE + 14, 13, App.WORD_COLOR));
         int h = 15;
         int cost = 0;
         if (app.isUpdateTower[0] && level[0] < 3) {
-            app.text("range:   " + LEVEL_COST[level[0]], App.BOARD_WIDTH * App.CELLSIZE + 12, 17 * App.CELLSIZE + 15 + h);
+            textManager.addNewText(new Text("range:   " + LEVEL_COST[level[0]], App.BOARD_WIDTH * App.CELLSIZE + 12, 17 * App.CELLSIZE + 15 + h, 13, App.WORD_COLOR));
             h += 15;
             cost += LEVEL_COST[level[0]];
         }
         if (app.isUpdateTower[1] && level[1] < 3) {
-            app.text("speed:   " + LEVEL_COST[level[1]], App.BOARD_WIDTH * App.CELLSIZE + 12, 17 * App.CELLSIZE + 15 + h);
+            textManager.addNewText(new Text("speed:   " + LEVEL_COST[level[1]], App.BOARD_WIDTH * App.CELLSIZE + 12, 17 * App.CELLSIZE + 15 + h, 13, App.WORD_COLOR));
             h += 15;
             cost += LEVEL_COST[level[1]];
         }
         if (app.isUpdateTower[2] && level[2] < 3) {
-            app.text("damage:  " + LEVEL_COST[level[2]], App.BOARD_WIDTH * App.CELLSIZE + 12, 17 * App.CELLSIZE + 15 + h);
+            textManager.addNewText(new Text("damage:  " + LEVEL_COST[level[2]], App.BOARD_WIDTH * App.CELLSIZE + 12, 17 * App.CELLSIZE + 15 + h, 13, App.WORD_COLOR));
             h += 15;
             cost += LEVEL_COST[level[2]];
         }
-        app.text("Total:    " + cost, App.BOARD_WIDTH * App.CELLSIZE + 12, 17 * App.CELLSIZE + 15 + h);
+        textManager.addNewText(new Text("Total:    " + cost, App.BOARD_WIDTH * App.CELLSIZE + 12, 17 * App.CELLSIZE + 15 + h, 13, App.WORD_COLOR));
     }
 }

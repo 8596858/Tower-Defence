@@ -3,6 +3,9 @@ package WizardTD.Monster;
 import WizardTD.App;
 import WizardTD.Display;
 import WizardTD.Effect;
+import WizardTD.Manager.Shape;
+import WizardTD.Manager.ShapeManager;
+import WizardTD.Manager.TextManager;
 import WizardTD.Pattern.Path;
 import processing.core.PImage;
 import processing.data.JSONObject;
@@ -337,19 +340,15 @@ public abstract class Monster implements Display, Effect {
     public abstract boolean monsterDie(App app);
 
     @Override
-    public void displayRect(App app) {
-        app.stroke(app.color(252, 3, 3));
-        app.fill(app.color(252, 3, 3));
-        app.rect(this.getY() + (float) (App.CELLSIZE - this.image.width) / 2, this.getX() - 2, this.image.width, 2);
+    public void addShape(App app, ShapeManager shapeManager) {
         if (this.hp >= 0) {
-            app.stroke(app.color(3, 252, 57));
-            app.fill(app.color(3, 252, 57));
-            app.rect(this.getY() + (float) (App.CELLSIZE - this.image.width) / 2, this.getX() - 2, this.image.width * (float)(this.getHp() / this.getTopHp()), 2);
+            shapeManager.addNewShape(new Shape(this.getY() + (float) (App.CELLSIZE - this.image.width) / 2, this.getX() - 2, this.image.width * (float)(this.getHp() / this.getTopHp()), 2, 1, App.HP_COLOR, App.HP_COLOR, 1));
         }
+        shapeManager.addNewShape(new Shape(this.getY() + (float) (App.CELLSIZE - this.image.width) / 2, this.getX() - 2, this.image.width, 2, 1, App.RED_COLOR, App.RED_COLOR, 1));
     }
 
     @Override
-    public void displayText(App app, int color) {
+    public void addText(App app, TextManager textManager) {
 
     }
 }

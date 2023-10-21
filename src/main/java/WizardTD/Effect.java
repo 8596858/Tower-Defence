@@ -5,14 +5,14 @@ package WizardTD;
  */
 public interface Effect {
     /**
-     * Move.
+     * Move the elements.
      *
      * @param app the main app
      */
     public void move(App app);
 
     /**
-     * Draw.
+     * Draw the elements.
      *
      * @param app the main app
      */

@@ -3,12 +3,12 @@ package WizardTD;
 import WizardTD.Button.ManaPool;
 import WizardTD.Monster.Beetle;
 import WizardTD.Monster.Monster;
+import WizardTD.Manager.ShapeManager;
+import WizardTD.Manager.TextManager;
 import WizardTD.Pattern.Path;
-import WizardTD.Pattern.Tower;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import processing.data.JSONObject;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -22,21 +22,19 @@ class ManaBarTest {
         App.map = app.mapInfo(app.jsonInfo);
         app.paths = new Paths();
         app.paths.setStartPoints(new Path(0, 0));
+        app.shapeManager = new ShapeManager();
+        app.textManager = new TextManager();
     }
 
-    /**
-     * Method under test: {@link ManaBar#ManaBar(int, int, int, String, App)}
-     */
     @Test
-    @Disabled("TODO: Complete this test")
-    void testConstructor() {
+    void testGetter() {
         assertEquals(0, manaBar.getX());
         assertEquals(0, manaBar.getY());
-        assertEquals(20, manaBar.getWidth());
-        assertEquals("", manaBar.getLabel());
-        assertEquals(200, manaBar.getProcess());
         assertEquals(2, manaBar.getGainedSpeed());
         assertEquals(1000, manaBar.getManaCap());
+        assertEquals(20, manaBar.getWidth());
+        assertEquals(200, manaBar.getProcess());
+        assertEquals("", manaBar.getLabel());
     }
 
     @Test
@@ -45,18 +43,14 @@ class ManaBarTest {
         assertEquals(300, manaBar.getProcess());
     }
 
-    /**
-     * Method under test: {@link ManaBar#updateProcess(boolean)}
-     * Method under test: {@link ManaBar#updateProcess(int)}
-     */
     @Test
     void testUpdateProcess() {
         App.IS_ACCELERATE = true;
         manaBar.updateProcess(true);
         assertEquals("200.07", String.format("%.2f", manaBar.getProcess()));
-        App.IS_ACCELERATE = true;
+        App.IS_ACCELERATE = false;
         manaBar.updateProcess(true);
-        assertEquals("200.13", String.format("%.2f", manaBar.getProcess()));
+        assertEquals("200.10", String.format("%.2f", manaBar.getProcess()));
         manaBar.setProcess(1200);
         manaBar.updateProcess(true);
         assertEquals(1000, manaBar.getProcess());
@@ -64,9 +58,6 @@ class ManaBarTest {
         assertEquals(880, manaBar.getProcess());
     }
 
-    /**
-     * Method under test: {@link ManaBar#beAttacked(Monster)}
-     */
     @Test
     void testBeAttacked() {
         Beetle beetle = new Beetle(app.paths.getStartPoints().get(0), app,
@@ -75,9 +66,6 @@ class ManaBarTest {
         assertEquals(100, manaBar.getProcess());
     }
 
-    /**
-     * Method under test: {@link ManaBar#addMonsterMana(Monster)}
-     */
     @Test
     void testAddMonsterMana() {
         Beetle beetle = new Beetle(app.paths.getStartPoints().get(0), app,
@@ -86,9 +74,6 @@ class ManaBarTest {
         assertEquals(210, manaBar.getProcess());
     }
 
-    /**
-     * Method under test: {@link ManaBar#updateManaBar(ManaPool)}
-     */
     @Test
     @Disabled("TODO: Complete this test")
     void testUpdateManaBar() {
@@ -99,58 +84,11 @@ class ManaBarTest {
         assertEquals(100, manaBar.getProcess());
     }
 
-    /**
-     * Method under test: {@link ManaBar#displayRect(App)}
-     */
     @Test
-    @Disabled("TODO: Complete this test")
-    void testDisplayRect() {
-        // TODO: Complete this test.
-        //   Reason: R013 No inputs found that don't throw a trivial exception.
-        //   Diffblue Cover tried to run the arrange/act section, but the method under
-        //   test threw
-        //   java.lang.NullPointerException
-        //       at WizardTD.ManaBar.<init>(ManaBar.java:34)
-        //   See https://diff.blue/R013 to resolve this issue.
-
-        ManaBar manaBar = new ManaBar(2, 3, 1, "Label", new App());
-        manaBar.displayRect(new App());
-    }
-
-    /**
-     * Method under test: {@link ManaBar#displayText(App, int)}
-     */
-    @Test
-    @Disabled("TODO: Complete this test")
-    void testDisplayText() {
-        // TODO: Complete this test.
-        //   Reason: R013 No inputs found that don't throw a trivial exception.
-        //   Diffblue Cover tried to run the arrange/act section, but the method under
-        //   test threw
-        //   java.lang.NullPointerException
-        //       at WizardTD.ManaBar.<init>(ManaBar.java:34)
-        //   See https://diff.blue/R013 to resolve this issue.
-
-        ManaBar manaBar = new ManaBar(2, 3, 1, "Label", new App());
-        manaBar.displayText(new App(), 1);
-    }
-
-    /**
-     * Method under test: {@link ManaBar#display(App, int)}
-     */
-    @Test
-    @Disabled("TODO: Complete this test")
     void testDisplay() {
-        // TODO: Complete this test.
-        //   Reason: R013 No inputs found that don't throw a trivial exception.
-        //   Diffblue Cover tried to run the arrange/act section, but the method under
-        //   test threw
-        //   java.lang.NullPointerException
-        //       at WizardTD.ManaBar.<init>(ManaBar.java:34)
-        //   See https://diff.blue/R013 to resolve this issue.
-
-        ManaBar manaBar = new ManaBar(2, 3, 1, "Label", new App());
-        manaBar.display(new App(), 1);
+        manaBar.display(app, app.shapeManager, app.textManager);
+        assertEquals(2, app.shapeManager.getShapeList().size());
+        assertEquals(2, app.textManager.getTextList().size());
     }
 }
 

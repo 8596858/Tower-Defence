@@ -19,7 +19,7 @@ public class UpdateSpeed extends Update{
     }
 
     /**
-     * create the function of "U2" button
+     * create the function of "U2" button, the firing speed of the tower.
      */
     @Override
     public void clickButton(App app) {

@@ -70,12 +70,22 @@ public class Path extends Pattern{
         this.length = length;
     }
 
+    /**
+     * Sets image for the path, and rotate it to the right angle.
+     *
+     * @param app the main app
+     */
     @Override
     public void setImage(App app) {
         this.image = app.loadImage("src/main/resources/WizardTD/" + this.type);
         this.image = app.rotateImageByDegrees(this.image, this.pathType[1]);
     }
 
+    /**
+     * Sets type for path, and calculate the angle that the image should rotate.
+     *
+     * @param type the type for path
+     */
     @Override
     public void setType(String type) {
         this.pathType = calculatePathAngle(App.map, this.x, this.y);

@@ -19,7 +19,7 @@ public class UpdateRange extends Update{
     }
 
     /**
-     * create the function of "U1" button
+     * create the function of "U1" button, update the range of the tower.
      */
     @Override
     public void clickButton(App app) {

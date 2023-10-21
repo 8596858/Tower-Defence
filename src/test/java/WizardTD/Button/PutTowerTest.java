@@ -3,26 +3,24 @@ package WizardTD.Button;
 import WizardTD.App;
 import WizardTD.JsonInfo;
 import WizardTD.ManaBar;
+import WizardTD.Manager.ShapeManager;
+import WizardTD.Manager.TextManager;
 import WizardTD.Pattern.Tower;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class PutTowerTest {
-    /**
-     * Method under test: {@link PutTower#display(App)}
-     */
     @Test
-    @Disabled("TODO: Complete this test")
     void testDisplay() {
         PutTower putTower = new PutTower(1, 1, 1);
-        putTower.display(new App());
+        ShapeManager shapeManager = new ShapeManager();
+        TextManager textManager = new TextManager();
+        putTower.display(shapeManager, textManager);
+        assertEquals(1, shapeManager.getShapeList().size());
+        assertEquals(1, textManager.getTextList().size());
     }
 
-    /**
-     * Method under test: {@link PutTower#clickButton(App)}
-     */
     @Test
     void testClickButton() {
         PutTower putTower = new PutTower(1, 1, 1);

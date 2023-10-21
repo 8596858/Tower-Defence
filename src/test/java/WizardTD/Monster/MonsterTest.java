@@ -3,13 +3,13 @@ package WizardTD.Monster;
 import WizardTD.App;
 import WizardTD.JsonInfo;
 import WizardTD.ManaBar;
+import WizardTD.Manager.ShapeManager;
 import WizardTD.Paths;
 import WizardTD.Pattern.Path;
 import WizardTD.Pattern.WizardHouse;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import processing.data.JSONObject;
+import processing.core.PImage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -23,6 +23,7 @@ public class MonsterTest {
         app.jsonInfo = new JsonInfo("config.json");
         App.map = app.mapInfo(app.jsonInfo);
         app.manaBar = new ManaBar(0, 0, 0, "", app);
+        app.shapeManager = new ShapeManager();
         app.paths = new Paths();
         app.paths.setStartPoints(new Path(0, 0));
         app.paths.getStartPoints().get(0).setParent(new Path(1, 0));
@@ -73,6 +74,7 @@ public class MonsterTest {
 
     @Test
     void testSetAccelerate() {
+        App.IS_ACCELERATE = false;
         monster.setAccelerate();
         assertEquals(0.5, monster.getSpeed());
         App.IS_ACCELERATE = true;
@@ -92,6 +94,7 @@ public class MonsterTest {
 
     @Test
     void testMove() {
+        App.IS_ACCELERATE = false;
         monster = new Gremlin(app.paths.getStartPoints().get(0), app,
                 app.jsonInfo.getWaves().getJSONObject(0).getJSONArray("monsters").getJSONObject(0));
         monster.x = 72;
@@ -166,5 +169,12 @@ public class MonsterTest {
         monster.monsterDie(app);
         monster.monsterDie(app);
         assertTrue(monster.monsterDie(app));
+    }
+
+    @Test
+    void testAddShape() {
+        monster.image = new PImage();
+        monster.addShape(app, app.shapeManager);
+        assertEquals(2, app.shapeManager.getShapeList().size());
     }
 }

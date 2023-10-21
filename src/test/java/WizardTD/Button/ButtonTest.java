@@ -5,9 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import WizardTD.App;
+import WizardTD.Manager.ShapeManager;
+import WizardTD.Manager.TextManager;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import processing.core.PGraphics;
 
 class ButtonTest {
     FasterSpeed fasterSpeed = new FasterSpeed(2, 3, 20);
@@ -40,21 +41,10 @@ class ButtonTest {
     }
 
     @Test
-    @Disabled()
-    void testDisplayRect() {
-        fasterSpeed.displayRect(app);
-    }
-
-    @Test
-    @Disabled()
     void testDisplayText() {
-        fasterSpeed.displayText(new App(), 1);
-    }
-
-    @Test
-    @Disabled()
-    void testDisplayButton() {
-        fasterSpeed.displayButton(new App(), 1);
+        app.textManager = new TextManager();
+        fasterSpeed.addText(app, app.textManager);
+        assertEquals(2, app.textManager.getTextList().size());
     }
 }
 

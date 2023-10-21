@@ -24,7 +24,11 @@ public class Beetle extends Monster {
         index = 0;
     }
 
-
+    /**
+     * Decide beetles moving and direction for the next frame.
+     *
+     * @param app the main app
+     */
     @Override
     public void move(App app) {
         if (currentPath.getDirection().get(index) == 0) {
@@ -105,6 +109,12 @@ public class Beetle extends Monster {
         }
     }
 
+    /**
+     * process of beetles die
+     *
+     * @param app the main app
+     * @return if the process is finish
+     */
     @Override
     public boolean monsterDie(App app) {
         if (index < 16) {

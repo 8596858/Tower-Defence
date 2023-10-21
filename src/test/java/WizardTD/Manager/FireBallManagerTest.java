@@ -1,73 +1,76 @@
 package WizardTD.Manager;
 
+import static java.lang.Thread.sleep;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import WizardTD.App;
-import WizardTD.FireBall;
-import WizardTD.JsonInfo;
-import WizardTD.Monster.Gremlin;
-import WizardTD.Paths;
-import WizardTD.Pattern.Path;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Disabled;
+import WizardTD.*;
+import WizardTD.Monster.Beetle;
+import WizardTD.Pattern.Tower;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
 
 class FireBallManagerTest {
     FireBallManager fireBallManager = new FireBallManager();
     App app = new App();
 
-//    @BeforeAll
-//    public void setUp() {
-//        app.jsonInfo = new JsonInfo("config.json");
-//        app.paths = new Paths();
-//        app.paths.setStartPoints(new Path(0, 0, app));
-//        app.monsterManager = new MonsterManager(app);
-//    }
-
     @Test
-    void testConstructor() {
-        assertTrue((new FireBallManager()).list.isEmpty());
+    void testGenerate() throws InterruptedException {
+        app.jsonInfo = new JsonInfo("config1.json");
+        App.map = app.mapInfo(app.jsonInfo);
+        app.paths = new Paths();
+        app.towerLevel = new int[3];
+        app.waves = new Wave[app.jsonInfo.getWaves().size()];
+        for (int i = 0; i < app.jsonInfo.getWaves().size(); i++) {
+            app.waves[i] = new Wave(app.jsonInfo.getWaves().getJSONObject(i));
+        }
+        app.buildMap(App.map, app.paths);
+        app.paths.findPaths(app);
+        app.monsterManager = new MonsterManager(app);
+        app.towers = new ArrayList<>();
+        Beetle beetle = new Beetle(app.paths.getStartPoints().get(0), app,
+                app.jsonInfo.getWaves().getJSONObject(0).getJSONArray("monsters").getJSONObject(0));
+        app.monsterManager.list.add(beetle);
+        app.towers.add(new Tower(2, 0, app));
+        fireBallManager.generate(app);
+        assertEquals(0, fireBallManager.list.size());
+        sleep(1500);
+        fireBallManager.generate(app);
+        assertEquals(1, fireBallManager.list.size());
     }
 
     @Test
-    void testGenerate() {
-
-    }
-
-    @Test
-    void testUpdate() {
-        fireBallManager = new FireBallManager();
+    void testUpdate() throws InterruptedException {
+        app.jsonInfo = new JsonInfo("config1.json");
+        App.map = app.mapInfo(app.jsonInfo);
+        app.paths = new Paths();
+        app.towerLevel = new int[3];
+        app.waves = new Wave[app.jsonInfo.getWaves().size()];
+        for (int i = 0; i < app.jsonInfo.getWaves().size(); i++) {
+            app.waves[i] = new Wave(app.jsonInfo.getWaves().getJSONObject(i));
+        }
+        app.buildMap(App.map, app.paths);
+        app.paths.findPaths(app);
+        app.monsterManager = new MonsterManager(app);
+        app.towers = new ArrayList<>();
+        Beetle beetle = new Beetle(app.paths.getStartPoints().get(0), app,
+                app.jsonInfo.getWaves().getJSONObject(0).getJSONArray("monsters").getJSONObject(0));
+        app.monsterManager.list.add(beetle);
+        app.towers.add(new Tower(2, 0, app));
+        fireBallManager.generate(app);
+        sleep(1500);
+        fireBallManager.generate(app);
         fireBallManager.update(app);
-        assertFalse(app.exitCalled());
-        assertEquals(100, app.width);
-        assertEquals(4, app.requestImageMax);
-        assertEquals(0, app.pmouseY);
-        assertEquals(0, app.pmouseX);
-        assertEquals(0, app.pixelWidth);
-        assertEquals(0, app.pixelHeight);
-        assertEquals(1, app.pixelDensity);
-        assertEquals(0, app.mouseY);
-        assertEquals(0, app.mouseX);
-        assertFalse(app.mousePressed);
-        assertEquals(0, app.mouseButton);
-        assertFalse(app.keyPressed);
-        assertEquals(0, app.keyCode);
-        assertEquals('\u0000', app.key);
-        assertEquals(100, app.height);
-        assertEquals(10.0f, app.frameRate);
-        assertEquals(0, app.frameCount);
-        assertFalse(app.focused);
-        assertTrue(app.firstMouse);
-        assertFalse(app.finished);
-        assertEquals(0, app.displayWidth);
-        assertEquals(0, app.displayHeight);
-        assertEquals(0.0d, app.currentMana);
-        assertEquals("config.json", app.configPath);
-        assertFalse(app.canUpdateTower);
-        assertTrue(app.isLooping());
-        assertTrue(fireBallManager.list.isEmpty());
+        assertEquals(1, fireBallManager.list.size());
+        fireBallManager.update(app);
+        fireBallManager.update(app);
+        fireBallManager.update(app);
+        fireBallManager.update(app);
+        fireBallManager.update(app);
+        fireBallManager.update(app);
+        fireBallManager.update(app);
+        fireBallManager.update(app);
+        assertEquals(0, fireBallManager.list.size());
     }
 }
 

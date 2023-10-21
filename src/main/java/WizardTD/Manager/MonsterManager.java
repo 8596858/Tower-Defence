@@ -37,7 +37,9 @@ public class MonsterManager extends Manager<Monster> {
     }
 
     /**
-     * @return the monsters
+     * Get the monsters
+     *
+     * @return the monster array list.
      */
     public ArrayList<Monster> getMonsters() {
         return list;
@@ -86,7 +88,7 @@ public class MonsterManager extends Manager<Monster> {
     }
 
     /**
-     * Sets if the monster is accelerated.
+     * Accelerate the speed of the monster.
      */
     public void setAccelerate() {
         for (Monster monster : list) {
@@ -118,7 +120,7 @@ public class MonsterManager extends Manager<Monster> {
                     else if (monsterObject.getString("type").matches("beetle")) {
                         list.add(new Beetle(app.paths.getStartPoints().get(app.random.nextInt(app.paths.getStartPoints().size())), app, monsterObject));
                     }
-                    else if (monsterObject.getString("type").matches("Worm")) {
+                    else if (monsterObject.getString("type").matches("worm")) {
                         list.add(new Worm(app.paths.getStartPoints().get(app.random.nextInt(app.paths.getStartPoints().size())), app, monsterObject));
                     }
                     MONSTER_INDEX++;
@@ -150,15 +152,18 @@ public class MonsterManager extends Manager<Monster> {
         }
     }
 
+    /**
+     * Draw the monsters in the map.
+     */
     @Override
-    public void drawElement(App app) {
+    public void drawElement(App app, ShapeManager shapeManager) {
         for (Monster monster : list) {
             monster.setImage(app);
             monster.draw(app);
         }
         for (Monster monster : list) {
             if (!monster.isDie()) {
-                monster.displayRect(app);
+                monster.addShape(app, shapeManager);
             }
         }
     }
