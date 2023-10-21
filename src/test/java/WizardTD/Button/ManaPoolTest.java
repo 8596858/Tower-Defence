@@ -20,9 +20,6 @@ class ManaPoolTest {
         assertEquals(1.5d, manaPool.getManaPoolSpellCapMultiplier());
     }
 
-    /**
-     * Method under test: {@link ManaPool#updatePoolSpellCost(JsonInfo)}
-     */
     @Test
     void testUpdatePoolSpellCost() {
         manaPool.updatePoolSpellCost(new JsonInfo("config.json"));
@@ -30,9 +27,6 @@ class ManaPoolTest {
         assertEquals(250, manaPool.getManaPoolSpellCost());
     }
 
-    /**
-     * Method under test: {@link ManaPool#display(ShapeManager, TextManager)}
-     */
     @Test
     void testDisplay() {
         ManaPool manaPool = new ManaPool(1, 1, 2, new JsonInfo("config.json"));
@@ -43,9 +37,6 @@ class ManaPoolTest {
         assertEquals(1, textManager.getTextList().size());
     }
 
-    /**
-     * Method under test: {@link ManaPool#clickButton(App)}
-     */
     @Test
     void testClickButton() {
         manaPool = new ManaPool(2, 3, 3, new JsonInfo("config.json"));

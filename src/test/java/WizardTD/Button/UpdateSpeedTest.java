@@ -11,9 +11,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class UpdateSpeedTest {
     App app = new App();
 
-    /**
-     * Method under test: {@link UpdateSpeed#clickButton(App)}
-     */
     @Test
     void testClickButton() {
         app.isUpdateTower = new boolean[3];

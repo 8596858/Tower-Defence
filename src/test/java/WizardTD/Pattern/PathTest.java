@@ -23,9 +23,6 @@ class PathTest {
         App.map = app.mapInfo(app.jsonInfo);
     }
 
-    /**
-     * Method under test: {@link Path#Path(int, int)}
-     */
     @Test
     void testConstructor() {
         assertEquals(0, path.getParent().size());
@@ -33,54 +30,36 @@ class PathTest {
         assertEquals(0, path.getDirection().size());
     }
 
-    /**
-     * Method under test: {@link Path#setParent(Path)}
-     */
     @Test
     void testSetParent() {
         path.setParent(new Path(2, 2));
         assertEquals(1, path.getParent().size());
     }
 
-    /**
-     * Method under test: {@link Path#clearParent()}
-     */
     @Test
     void testClearParent() {
         path.clearParent();
         assertEquals(0, path.getParent().size());
     }
 
-    /**
-     * Method under test: {@link Path#setDirection(int)}
-     */
     @Test
     void testSetDirection() {
         path.setDirection(0);
         assertEquals(1, path.getDirection().size());
     }
 
-    /**
-     * Method under test: {@link Path#clearDirection()}
-     */
     @Test
     void testClearDirection() {
         path.clearDirection();
         assertEquals(0, path.getDirection().size());
     }
 
-    /**
-     * Method under test: {@link Path#setLength(int)}
-     */
     @Test
     void testSetLength() {
         path.setLength(1);
         assertEquals(1, path.getLength());
     }
 
-    /**
-     * Method under test: {@link Path#calculatePathAngle(char[][], int, int)}
-     */
     @Test
     void testCalculatePathAngle() {
         path = new Path(5, 10);

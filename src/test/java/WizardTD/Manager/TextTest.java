@@ -5,18 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 class TextTest {
-    /**
-     * Methods under test:
-     *
-     * <ul>
-     *   <li>{@link Text#Text(String, float, float, int, int)}
-     *   <li>{@link Text#getColor()}
-     *   <li>{@link Text#getContent()}
-     *   <li>{@link Text#getSize()}
-     *   <li>{@link Text#getX()}
-     *   <li>{@link Text#getY()}
-     * </ul>
-     */
     @Test
     void testGetter() {
         Text actualText = new Text("text", 10f, 10f, 3, 1);

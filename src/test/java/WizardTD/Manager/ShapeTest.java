@@ -5,9 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 class ShapeTest {
-    /**
-     * Method under test: {@link Shape#Shape(float, float, float, float, int, int, int, float)}
-     */
     @Test
     void testGetter() {
         Shape actualShape = new Shape(10f, 10f, 10f, 10f, 1, 1, 1, 1f);

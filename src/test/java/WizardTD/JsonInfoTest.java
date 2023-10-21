@@ -6,9 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import org.junit.jupiter.api.Test;
 
 class JsonInfoTest {
-    /**
-     * Method under test: {@link JsonInfo#JsonInfo(String)}
-     */
     @Test
     void testConstructor() {
         JsonInfo jsonInfo = new JsonInfo("config.json");
@@ -25,11 +22,6 @@ class JsonInfoTest {
         assertEquals(40, jsonInfo.getInitial_tower_damage());
         assertEquals(2, jsonInfo.getInitial_mana_gained_per_second());
         assertEquals(1000, jsonInfo.getInitial_mana_cap());
-    }
-
-    @Test
-    void testNoFile() {
-        JsonInfo jsonInfo = new JsonInfo("config5.json");
     }
 }
 

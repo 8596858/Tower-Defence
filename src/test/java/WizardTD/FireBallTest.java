@@ -27,17 +27,11 @@ class FireBallTest {
         app.paths.getStartPoints().get(0).setDirection(0);
     }
 
-    /**
-     * Method under test: {@link FireBall#FireBall(float, float, double, Monster)}
-     */
     @Test
     void testConstructor() {
         assertFalse(fireBall.isFinish());
     }
 
-    /**
-     * Method under test: {@link FireBall#setAccelerate()}
-     */
     @Test
     void testSetAccelerate() {
         App.IS_ACCELERATE = true;
@@ -48,34 +42,6 @@ class FireBallTest {
         assertEquals(5f, FireBall.SPEED);
     }
 
-    /**
-     * Method under test: {@link FireBall#draw(App)}
-     */
-    @Test
-    @Disabled("TODO: Complete this test")
-    void testDraw() {
-        // TODO: Complete this test.
-        //   Reason: R013 No inputs found that don't throw a trivial exception.
-        //   Diffblue Cover tried to run the arrange/act section, but the method under
-        //   test threw
-        //   java.lang.NullPointerException
-        //       at WizardTD.Pattern.Path.calculatePathAngle(Path.java:123)
-        //       at WizardTD.Pattern.Path.setType(Path.java:81)
-        //       at WizardTD.Pattern.Pattern.<init>(Pattern.java:37)
-        //       at WizardTD.Pattern.Path.<init>(Path.java:25)
-        //   See https://diff.blue/R013 to resolve this issue.
-
-        App app = new App();
-        Path path = new Path(2, 3);
-
-        JSONObject jsonObject = JSONObject.parse("Source");
-        FireBall fireBall = new FireBall(10.0f, 10.0f, 10.0d, new Beetle(path, new App(), jsonObject));
-        fireBall.draw(new App());
-    }
-
-    /**
-     * Method under test: {@link FireBall#move(App)}
-     */
     @Test
     void testMove() {
         fireBall.move(app);

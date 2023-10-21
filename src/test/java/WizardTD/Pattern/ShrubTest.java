@@ -5,9 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 class ShrubTest {
-    /**
-     * Method under test: {@link Shrub#Shrub(int, int)}
-     */
     @Test
     void testConstructor() {
         Shrub actualShrub = new Shrub(2, 3);

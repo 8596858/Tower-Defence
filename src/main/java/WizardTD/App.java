@@ -55,7 +55,7 @@ public class App extends PApplet {
     /**
      * The constant BAR_COLOR is the color of the bar.
      */
-    public static int BAR_COLOR = 0x873701;
+    public static int BAR_COLOR = 0xeb5f00;
 
     /**
      * The constant WORD_COLOR is the color of the text.
@@ -358,8 +358,10 @@ public class App extends PApplet {
      */
     @Override
     public void keyReleased() {
-        if (this.key == 'p') {
-            buttonList.getButtons()[1].clickButton(this);
+        if (manaBar.getProcess() >= 0 && (WAVE_INDEX < waves.length || monsterManager.getMonsters().size() > 0)) {
+            if (this.key == 'p') {
+                buttonList.getButtons()[1].clickButton(this);
+            }
         }
         if (!PAUSE) {
             if (this.key == 'f') {
@@ -412,8 +414,10 @@ public class App extends PApplet {
                     IN_MENU = false;
                 }
             }
-            if (buttonList.getButtons()[index].getLabel().matches("P")) {
-                buttonList.getButtons()[1].clickButton(this);
+            if (manaBar.getProcess() >= 0 && (WAVE_INDEX < waves.length || monsterManager.getMonsters().size() > 0)) {
+                if (buttonList.getButtons()[index].getLabel().matches("P")) {
+                    buttonList.getButtons()[1].clickButton(this);
+                }
             }
             if (!PAUSE) {
                 if (buttonList.getButtons()[index].getLabel().matches("T")) {
@@ -547,11 +551,6 @@ public class App extends PApplet {
                     }
                 }
                 updatePixels();
-                for (int i = 0; i < 7; i++) {
-                    buttonList.getButtons()[i].addShape(this, shapeManager);
-                    buttonList.getButtons()[i].addText(this, textManager);
-                }
-                displayShapeAndText();
             }
             if (manaBar.getProcess() <= 0) {
                 fill(color(0, 255, 0));
@@ -568,6 +567,11 @@ public class App extends PApplet {
                 text("YOU WIN", (float) ((BOARD_WIDTH - 7) * CELLSIZE) / 2, 5 * CELLSIZE + TOPBAR);
                 PAUSE = true;
             }
+            for (int i = 0; i < 7; i++) {
+                buttonList.getButtons()[i].addShape(this, shapeManager);
+                buttonList.getButtons()[i].addText(this, textManager);
+            }
+            displayShapeAndText();
         }
 
     }

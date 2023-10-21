@@ -191,8 +191,8 @@ public abstract class Button implements Display {
     public void addText(App app, TextManager textManager) {
         textManager.addNewText(new Text(this.getLabel(), this.getX() + this.getSize() / 4,
                 this.getY() + this.getSize() / 2,20, App.WORD_COLOR));
-        textManager.addNewText(new Text(this.getDescribe(), this.getX() + this.getSize(),
-                this.getY() + this.getSize() / 2,10, App.WORD_COLOR));
+        textManager.addNewText(new Text(this.getDescribe(), this.getX() + this.getSize() * 1.1f,
+                this.getY() + this.getSize() / 2,12, App.WORD_COLOR));
     }
 
     /**

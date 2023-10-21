@@ -75,7 +75,6 @@ class ManaBarTest {
     }
 
     @Test
-    @Disabled("TODO: Complete this test")
     void testUpdateManaBar() {
         ManaPool manaPool = new ManaPool(0, 0, 10, app.jsonInfo);
         manaBar.updateManaBar(manaPool);

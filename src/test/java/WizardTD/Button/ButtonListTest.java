@@ -7,9 +7,7 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 class ButtonListTest {
-    /**
-     * Test get buttons.
-     */
+
     @Test
     void testGetButtons() {
         assertEquals(11, (new ButtonList(new JsonInfo("config.json"))).getButtons().length);

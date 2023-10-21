@@ -7,9 +7,6 @@ import WizardTD.App;
 import org.junit.jupiter.api.Test;
 
 class Level2Test {
-    /**
-     * Method under test: {@link Level2#clickButton(App)}
-     */
     @Test
     void testClickButton() {
         App app = new App();

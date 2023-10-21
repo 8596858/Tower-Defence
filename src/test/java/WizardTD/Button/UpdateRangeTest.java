@@ -11,9 +11,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class UpdateRangeTest {
     App app = new App();
 
-    /**
-     * Method under test: {@link UpdateRange#clickButton(App)}
-     */
     @Test
     void testClickButton() {
         app.isUpdateTower = new boolean[3];

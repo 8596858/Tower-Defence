@@ -10,9 +10,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class UpdateDamageTest{
     App app = new App();
 
-    /**
-     * Method under test: {@link UpdateDamage#clickButton(App)}
-     */
     @Test
     void testClickButton() {
         app.isUpdateTower = new boolean[3];

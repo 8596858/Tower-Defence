@@ -8,9 +8,6 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 class PatternTest {
-    /**
-     * Method under test: {@link Pattern#setType(String)}
-     */
     @Test
     void constructor() {
         Grass grass = new Grass(2, 3);
@@ -19,9 +16,6 @@ class PatternTest {
         assertEquals(3, grass.getY());
     }
 
-    /**
-     * Method under test: {@link Pattern#getType()}
-     */
     @Test
     void testSetType() {
         Grass grass = new Grass(2, 3);

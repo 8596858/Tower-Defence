@@ -8,9 +8,6 @@ import org.checkerframework.checker.units.qual.A;
 import org.junit.jupiter.api.Test;
 
 class Level1Test {
-    /**
-     * Method under test: {@link Level1#clickButton(App)}
-     */
     @Test
     void testClickButton() {
         App app = new App();

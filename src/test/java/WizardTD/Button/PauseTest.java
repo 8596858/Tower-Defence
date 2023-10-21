@@ -8,9 +8,6 @@ import WizardTD.App;
 import org.junit.jupiter.api.Test;
 
 class PauseTest {
-    /**
-     * Method under test: {@link Pause#clickButton(App)}
-     */
     @Test
     void testClickButton() {
         Pause pause = new Pause(1, 1, 2);

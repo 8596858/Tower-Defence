@@ -29,23 +29,12 @@ class TowerTest {
         app.isUpdateTower[2] = true;
     }
 
-    /**
-     * Method under test: {@link Tower#Tower(int, int, App)}
-     */
     @Test
     void testConstructor() {
         assertEquals("tower0.png", tower.getType());
         assertEquals(40, tower.getDamage());
     }
 
-    /**
-     * Methods under test:
-     *
-     * <ul>
-     *   <li>{@link Tower#setTimer(long)}
-     *   <li>{@link Tower#setAccelerate()}
-     * </ul>
-     */
     @Test
     void testSetter() {
         tower.setTimer(20);
@@ -58,9 +47,6 @@ class TowerTest {
         assertEquals(1.5d, tower.getFiringSpeed());
     }
 
-    /**
-     * Method under test: {@link Tower#updateLevel(boolean[], App)}
-     */
     @Test
     void testUpdateLevel() {
         tower = new Tower(0, 0, app);
@@ -84,21 +70,16 @@ class TowerTest {
         assertEquals(100, tower.getDamage());
     }
 
-    /**
-     * Method under test: {@link Tower#display(App, ShapeManager, TextManager)}
-     */
     @Test
     void testDisplay() {
+        app.shapeManager = new ShapeManager();
+        app.textManager = new TextManager();
         tower.display(app, app.shapeManager, app.textManager);
         assertEquals(4, app.shapeManager.getShapeList().size());
         assertEquals(5, app.textManager.getTextList().size());
     }
 
-    /**
-     * Method under test: {@link Tower#fillPixels(ShapeManager)}
-     */
     @Test
-    @Disabled("TODO: Complete this test")
     void testFillPixels() {
         app.manaBar.setProcess(1000);
         tower.updateLevel(app.isUpdateTower, app);
