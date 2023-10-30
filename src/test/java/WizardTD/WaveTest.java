@@ -1,13 +1,13 @@
 package WizardTD;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import processing.data.JSONArray;
-import processing.data.JSONObject;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class WaveTest {
+    /**
+     * Test if the Wave can be instantiated correctly.
+     */
     @Test
     void testConstructor() {
         JsonInfo jsonInfo = new JsonInfo("config.json");

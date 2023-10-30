@@ -5,15 +5,16 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import WizardTD.App;
-import WizardTD.Manager.ShapeManager;
 import WizardTD.Manager.TextManager;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 class ButtonTest {
     FasterSpeed fasterSpeed = new FasterSpeed(2, 3, 20);
     App app = new App();
 
+    /**
+     * Test the getter methods in Button.
+     */
     @Test
     void testGetter() {
         assertEquals(2, fasterSpeed.getX());
@@ -27,6 +28,9 @@ class ButtonTest {
         assertEquals("FF", fasterSpeed.getLabel());
     }
 
+    /**
+     * Test isUsing() method in Button.
+     */
     @Test
     void testIsUsing() {
         assertFalse(fasterSpeed.isUsing());
@@ -34,14 +38,20 @@ class ButtonTest {
         assertTrue(fasterSpeed.isUsing());
     }
 
+    /**
+     * Test setUsing(boolean) method in Button.
+     */
     @Test
     void testSetUsing() {
         fasterSpeed.setUsing(true);
         assertTrue(fasterSpeed.isUsing());
     }
 
+    /**
+     * Test addText() method in Button.
+     */
     @Test
-    void testDisplayText() {
+    void testAddText() {
         app.textManager = new TextManager();
         fasterSpeed.addText(app, app.textManager);
         assertEquals(2, app.textManager.getTextList().size());

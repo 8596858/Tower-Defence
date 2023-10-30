@@ -1,20 +1,10 @@
 package WizardTD.Monster;
 
 import WizardTD.*;
-import WizardTD.Button.ButtonList;
-import WizardTD.Manager.FireBallManager;
-import WizardTD.Manager.MonsterManager;
 import WizardTD.Pattern.Path;
-import WizardTD.Pattern.Tower;
 import WizardTD.Pattern.WizardHouse;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import processing.core.PImage;
-import processing.data.JSONObject;
-
-import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -46,6 +36,9 @@ class BeetleTest{
         app.wizardHouse = new WizardHouse(2, 0);
     }
 
+    /**
+     * Test if the Beetle can be instantiated correctly.
+     */
     @Test
     void testConstructor() {
         Beetle beetle = new Beetle(app.paths.getStartPoints().get(0), app,
@@ -55,6 +48,9 @@ class BeetleTest{
         assertEquals(0, beetle.getY());
     }
 
+    /**
+     * Test monsterDie(App) method in Beetle.
+     */
     @Test
     void testMonsterDie() {
         Beetle beetle = new Beetle(app.paths.getStartPoints().get(0), app,
@@ -79,6 +75,9 @@ class BeetleTest{
         assertTrue(beetle.monsterDie(app));
     }
 
+    /**
+     * Test move(App) method in Beetle.
+     */
     @Test
     void testMove() {
         App.IS_ACCELERATE = false;

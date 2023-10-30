@@ -2,8 +2,6 @@ package WizardTD.Pattern;
 
 import WizardTD.App;
 
-import java.awt.image.BufferedImage;
-
 /**
  * The type wizard house.
  */

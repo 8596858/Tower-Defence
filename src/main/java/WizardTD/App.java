@@ -55,7 +55,7 @@ public class App extends PApplet {
     /**
      * The constant BAR_COLOR is the color of the bar.
      */
-    public static int BAR_COLOR = 0xeb5f00;
+    public static int BAR_COLOR = 0xb88d00;
 
     /**
      * The constant WORD_COLOR is the color of the text.
@@ -381,6 +381,7 @@ public class App extends PApplet {
             }
             if (this.key == 'm') {
                 buttonList.getButtons()[6].clickButton(this);
+                buttonList.getButtons()[6].setUsing(false);
             }
         }
     }
@@ -437,6 +438,7 @@ public class App extends PApplet {
                 }
                 if (buttonList.getButtons()[index].getLabel().matches("M")) {
                     buttonList.getButtons()[6].clickButton(this);
+                    buttonList.getButtons()[6].setUsing(false);
                 }
             }
         } else if (mouseInMap()) {
@@ -464,12 +466,7 @@ public class App extends PApplet {
      */
     @Override
     public void mouseReleased(MouseEvent e) {
-        int index = mouseInButton(buttonList.getButtons());
-        if (index != -1) {
-            if (buttonList.getButtons()[index].getLabel().matches("M")) {
-                buttonList.getButtons()[index].setUsing(false);
-            }
-        } else if (mouseInMap()) {
+        if (mouseInMap()) {
             int[] coordinate = patternCoordinate(e.getY(), e.getX());
             if (!PAUSE) {
                 if (CAN_BUILD_TOWER && patterns[coordinate[0]][coordinate[1]].getType().matches("grass.png")) {

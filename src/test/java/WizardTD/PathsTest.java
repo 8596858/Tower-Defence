@@ -1,12 +1,9 @@
 package WizardTD;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import WizardTD.Pattern.Path;
-import WizardTD.Pattern.Pattern;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 class PathsTest {
@@ -19,11 +16,17 @@ class PathsTest {
         App.map = app.mapInfo(app.jsonInfo);
     }
 
+    /**
+     * Test if the Paths can be instantiated correctly.
+     */
     @Test
     void testConstructor() {
         assertEquals(0, paths.getStartPoints().size());
     }
 
+    /**
+     * Test setStartPoints(Path) method in Paths.
+     */
     @Test
     void testSetStartPoints() {
         Path path = new Path(2, 3);
@@ -31,6 +34,9 @@ class PathsTest {
         assertEquals(1, paths.getStartPoints().size());
     }
 
+    /**
+     * Test findPaths(App) method in Paths.
+     */
     @Test
     void testFindPaths() {
         paths = new Paths();

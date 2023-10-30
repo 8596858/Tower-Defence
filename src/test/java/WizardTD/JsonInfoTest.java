@@ -1,11 +1,13 @@
 package WizardTD;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 
 import org.junit.jupiter.api.Test;
 
 class JsonInfoTest {
+    /**
+     * Test if the JsonInfo can be instantiated correctly.
+     */
     @Test
     void testConstructor() {
         JsonInfo jsonInfo = new JsonInfo("config.json");

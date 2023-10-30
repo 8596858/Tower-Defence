@@ -2,7 +2,6 @@ package WizardTD.Button;
 
 import WizardTD.App;
 import WizardTD.Pattern.Tower;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -11,6 +10,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class UpdateSpeedTest {
     App app = new App();
 
+    /**
+     * Test clickButton(App) method in UpdateSpeed.
+     */
     @Test
     void testClickButton() {
         app.isUpdateTower = new boolean[3];

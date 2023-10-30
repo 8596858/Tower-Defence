@@ -1,14 +1,8 @@
 package WizardTD.Pattern;
 
 import WizardTD.App;
-
-import java.util.ArrayList;
-
 import WizardTD.JsonInfo;
-import WizardTD.ManaBar;
-import WizardTD.Paths;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -23,43 +17,64 @@ class PathTest {
         App.map = app.mapInfo(app.jsonInfo);
     }
 
+    /**
+     * Test getter methods in Path.
+     */
     @Test
-    void testConstructor() {
+    void testGetter() {
         assertEquals(0, path.getParent().size());
         assertEquals(0, path.getLength());
         assertEquals(0, path.getDirection().size());
     }
 
+    /**
+     * Test setParent(Path) method in Path.
+     */
     @Test
     void testSetParent() {
         path.setParent(new Path(2, 2));
         assertEquals(1, path.getParent().size());
     }
 
+    /**
+     * Test clearParent() method in Path.
+     */
     @Test
     void testClearParent() {
         path.clearParent();
         assertEquals(0, path.getParent().size());
     }
 
+    /**
+     * Test setDirection(int) method in Path.
+     */
     @Test
     void testSetDirection() {
         path.setDirection(0);
         assertEquals(1, path.getDirection().size());
     }
 
+    /**
+     * Test clearDirection() method in Path.
+     */
     @Test
     void testClearDirection() {
         path.clearDirection();
         assertEquals(0, path.getDirection().size());
     }
 
+    /**
+     * Test setLength(int) method in Path.
+     */
     @Test
     void testSetLength() {
         path.setLength(1);
         assertEquals(1, path.getLength());
     }
 
+    /**
+     * Test setType(String) and calculatePathAngle(char[][], int, int) method in Path.
+     */
     @Test
     void testCalculatePathAngle() {
         path = new Path(5, 10);

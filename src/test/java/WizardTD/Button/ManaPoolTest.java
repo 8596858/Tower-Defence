@@ -5,14 +5,15 @@ import WizardTD.JsonInfo;
 import WizardTD.Manager.ShapeManager;
 import WizardTD.Manager.TextManager;
 import WizardTD.ManaBar;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class ManaPoolTest {
     ManaPool manaPool = new ManaPool(2, 3, 3, new JsonInfo("config.json"));
-
+    /**
+     * Test the getter methods in ManaPool.
+     */
     @Test
     void testGetter() {
         assertEquals(1.1d, manaPool.getManaPoolSpellGainedMultiplier());
@@ -20,6 +21,9 @@ class ManaPoolTest {
         assertEquals(1.5d, manaPool.getManaPoolSpellCapMultiplier());
     }
 
+    /**
+     * Test updatePoolSpellCost(JsonInfo) method in ManaPool.
+     */
     @Test
     void testUpdatePoolSpellCost() {
         manaPool.updatePoolSpellCost(new JsonInfo("config.json"));
@@ -27,6 +31,9 @@ class ManaPoolTest {
         assertEquals(250, manaPool.getManaPoolSpellCost());
     }
 
+    /**
+     * Test display(ShapeManager, TextManager) method in ManaPool.
+     */
     @Test
     void testDisplay() {
         ManaPool manaPool = new ManaPool(1, 1, 2, new JsonInfo("config.json"));
@@ -37,6 +44,9 @@ class ManaPoolTest {
         assertEquals(1, textManager.getTextList().size());
     }
 
+    /**
+     * Test clickButton(App) method in ManaPool.
+     */
     @Test
     void testClickButton() {
         manaPool = new ManaPool(2, 3, 3, new JsonInfo("config.json"));

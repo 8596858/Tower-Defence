@@ -1,13 +1,12 @@
 package WizardTD.Manager;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 class ShapeManagerTest {
+    /**
+     * Test addNewShape(Shape) method in ShapeManager.
+     */
     @Test
     void testAddNewShape() {
         ShapeManager shapeManager = new ShapeManager();
@@ -15,6 +14,9 @@ class ShapeManagerTest {
         assertEquals(1, shapeManager.getShapeList().size());
     }
 
+    /**
+     * Test popShape() method in ShapeManager.
+     */
     @Test
     void testPopShape() {
         ShapeManager shapeManager = new ShapeManager();

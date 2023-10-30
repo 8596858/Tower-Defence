@@ -8,12 +8,18 @@ import org.junit.jupiter.api.Test;
 class ShowWaveTest {
     ShowWave showWave = new ShowWave(0, 0, 1, 10.0d);
 
+    /**
+     * Test getter methods in ShowWave.
+     */
     @Test
-    void testConstructor() {
+    void testGetter() {
         assertEquals(10, showWave.getDuration());
         assertEquals(1, showWave.getSpeed());
     }
 
+    /**
+     * Test setter methods in ShowWave.
+     */
     @Test
     void testSetter() {
         showWave.setWave(2);
@@ -23,8 +29,11 @@ class ShowWaveTest {
         assertEquals(2, showWave.getSpeed());
     }
 
+    /**
+     * Test addText(App, TextManager) method in ShowWave.
+     */
     @Test
-    void tetAssText() {
+    void testAddText() {
         App app = new App();
         app.textManager = new TextManager();
         showWave.addText(app, app.textManager);

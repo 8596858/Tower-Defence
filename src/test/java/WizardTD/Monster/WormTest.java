@@ -5,13 +5,14 @@ import WizardTD.JsonInfo;
 import WizardTD.ManaBar;
 import WizardTD.Paths;
 import WizardTD.Pattern.Path;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import processing.data.JSONObject;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class WormTest {
+    /**
+     * Test monsterDie(App) method in Worm.
+     */
     @Test
     void testMonsterDie() {
         App app = new App();

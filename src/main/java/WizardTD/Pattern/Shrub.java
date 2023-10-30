@@ -1,7 +1,5 @@
 package WizardTD.Pattern;
 
-import WizardTD.App;
-
 /**
  * The type Shrub.
  */

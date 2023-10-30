@@ -11,6 +11,9 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class PutTowerTest {
+    /**
+     * Test display(ShapeManager, TextManager) method in PutTower.
+     */
     @Test
     void testDisplay() {
         PutTower putTower = new PutTower(1, 1, 1);
@@ -21,6 +24,9 @@ class PutTowerTest {
         assertEquals(1, textManager.getTextList().size());
     }
 
+    /**
+     * Test clickButton(App) method in PutTower.
+     */
     @Test
     void testClickButton() {
         PutTower putTower = new PutTower(1, 1, 1);

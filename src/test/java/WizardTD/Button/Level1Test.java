@@ -1,13 +1,14 @@
 package WizardTD.Button;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import WizardTD.App;
-import org.checkerframework.checker.units.qual.A;
 import org.junit.jupiter.api.Test;
 
 class Level1Test {
+    /**
+     * Test clickButton(App) method in Level1.
+     */
     @Test
     void testClickButton() {
         App app = new App();

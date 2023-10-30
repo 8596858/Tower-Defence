@@ -6,7 +6,6 @@ import WizardTD.ManaBar;
 import WizardTD.Manager.ShapeManager;
 import WizardTD.Manager.TextManager;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -29,12 +28,18 @@ class TowerTest {
         app.isUpdateTower[2] = true;
     }
 
+    /**
+     * Test if the Tower can be instantiated correctly.
+     */
     @Test
     void testConstructor() {
         assertEquals("tower0.png", tower.getType());
         assertEquals(40, tower.getDamage());
     }
 
+    /**
+     * Test setter methods in Tower.
+     */
     @Test
     void testSetter() {
         tower.setTimer(20);
@@ -47,6 +52,9 @@ class TowerTest {
         assertEquals(1.5d, tower.getFiringSpeed());
     }
 
+    /**
+     * Test updateLevel(boolean[], App) method in Tower.
+     */
     @Test
     void testUpdateLevel() {
         tower = new Tower(0, 0, app);
@@ -70,6 +78,9 @@ class TowerTest {
         assertEquals(100, tower.getDamage());
     }
 
+    /**
+     * Test display(App, ShapeManager, TextManager) method in Tower.
+     */
     @Test
     void testDisplay() {
         app.shapeManager = new ShapeManager();
@@ -79,6 +90,9 @@ class TowerTest {
         assertEquals(5, app.textManager.getTextList().size());
     }
 
+    /**
+     * Test fillPixels(ShapeManager) method in Tower.
+     */
     @Test
     void testFillPixels() {
         app.manaBar.setProcess(1000);

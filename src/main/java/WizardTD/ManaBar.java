@@ -198,7 +198,7 @@ public class ManaBar implements Display{
     @Override
     public void addText(App app, TextManager textManager) {
         textManager.addNewText(new Text(this.getLabel(), this.getX() - 50, this.getY() + 20, 15, App.WORD_COLOR));
-        textManager.addNewText(new Text(String.format("%.0f", this.getProcess()) + "/" + String.format("%.0f", this.getManaCap()), this.getX() + this.getManaCap() * 0.06f, this.getY() + this.getWidth() / 1.5f, 10, App.WORD_COLOR));
+        textManager.addNewText(new Text(String.format("%.0f", this.getProcess()) + " / " + String.format("%.0f", this.getManaCap()), this.getX() + this.getWidth() * 1.5f, this.getY() + this.getWidth() / 1.5f, 15, App.WORD_COLOR));
     }
 
     /**

@@ -1,12 +1,9 @@
 package WizardTD;
 
 import WizardTD.Monster.Beetle;
-import WizardTD.Monster.Monster;
 import WizardTD.Pattern.Path;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import processing.data.JSONObject;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -27,11 +24,17 @@ class FireBallTest {
         app.paths.getStartPoints().get(0).setDirection(0);
     }
 
+    /**
+     * Test if the FireBall can be instantiated correctly.
+     */
     @Test
     void testConstructor() {
         assertFalse(fireBall.isFinish());
     }
 
+    /**
+     * Test setAccelerate() method in FireBall.
+     */
     @Test
     void testSetAccelerate() {
         App.IS_ACCELERATE = true;
@@ -42,6 +45,9 @@ class FireBallTest {
         assertEquals(5f, FireBall.SPEED);
     }
 
+    /**
+     * Test move(App) method in FireBall.
+     */
     @Test
     void testMove() {
         fireBall.move(app);

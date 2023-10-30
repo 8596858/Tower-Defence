@@ -4,10 +4,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import WizardTD.App;
 import WizardTD.JsonInfo;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 class WizardHouseTest {
+    /**
+     * Test getter methods in WizardHouse.
+     */
     @Test
     void testGetter() {
         WizardHouse wizardHouse = new WizardHouse(1, 1);
@@ -16,6 +18,9 @@ class WizardHouseTest {
         assertEquals(1, wizardHouse.getY());
     }
 
+    /**
+     * Test calculateHouseAngle(char[][], int, int) method in WizardHouse.
+     */
     @Test
     void testCalculateHouseAngle() {
         WizardHouse wizardHouse = new WizardHouse(13, 6);

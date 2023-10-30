@@ -5,6 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 class TextTest {
+    /**
+     * Test getter methods in Text.
+     */
     @Test
     void testGetter() {
         Text actualText = new Text("text", 10f, 10f, 3, 1);

@@ -1,13 +1,12 @@
 package WizardTD.Manager;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 class TextManagerTest {
+    /**
+     * Test addNewText(Text) method in TextManager.
+     */
     @Test
     void testAddNewText() {
         TextManager textManager = new TextManager();
@@ -15,6 +14,9 @@ class TextManagerTest {
         assertEquals(1, textManager.getTextList().size());
     }
 
+    /**
+     * Test popText() method in TextManager.
+     */
     @Test
     void testPopText() {
         TextManager textManager = new TextManager();

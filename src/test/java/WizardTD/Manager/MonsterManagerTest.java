@@ -1,7 +1,6 @@
 package WizardTD.Manager;
 
 import WizardTD.*;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -13,10 +12,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class MonsterManagerTest {
     App app = new App();
 
-    @BeforeAll
-    public static void setUp() {
-
-    }
+    /**
+     * Test generate(App) method in MonsterManager.
+     */
     @Test
     void testGenerate() throws InterruptedException {
         app.jsonInfo = new JsonInfo("config1.json");
@@ -41,6 +39,9 @@ class MonsterManagerTest {
         assertEquals(1, monsterManager.getMonsters().size());
     }
 
+    /**
+     * Test setAccelerate() method in MonsterManager.
+     */
     @Test
     void testSetAccelerate() throws InterruptedException {
         app.jsonInfo = new JsonInfo("config1.json");
@@ -67,6 +68,9 @@ class MonsterManagerTest {
         assertEquals(2, monsterManager.getMonsters().get(0).getSpeed());
     }
 
+    /**
+     * Test update(App) method in MonsterManager.
+     */
     @Test
     void testUpdate() throws InterruptedException {
         app.jsonInfo = new JsonInfo("config1.json");

@@ -3,7 +3,6 @@ package WizardTD.Button;
 import WizardTD.*;
 import WizardTD.Manager.MonsterManager;
 import WizardTD.Monster.Monster;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -11,6 +10,9 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
 
 class FasterSpeedTest {
+    /**
+     * Test clickButton(App) method in FasterSpeed.
+     */
     @Test
     void testClickButton() {
         App app = new App();

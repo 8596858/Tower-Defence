@@ -14,6 +14,9 @@ class FireBallManagerTest {
     FireBallManager fireBallManager = new FireBallManager();
     App app = new App();
 
+    /**
+     * Test generate(App) method in FireBallManager.
+     */
     @Test
     void testGenerate() throws InterruptedException {
         app.jsonInfo = new JsonInfo("config1.json");
@@ -39,6 +42,9 @@ class FireBallManagerTest {
         assertEquals(1, fireBallManager.list.size());
     }
 
+    /**
+     * Test update(App) method in FireBallManager.
+     */
     @Test
     void testUpdate() throws InterruptedException {
         app.jsonInfo = new JsonInfo("config1.json");

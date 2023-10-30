@@ -2,12 +2,10 @@ package WizardTD;
 
 import WizardTD.Button.ManaPool;
 import WizardTD.Monster.Beetle;
-import WizardTD.Monster.Monster;
 import WizardTD.Manager.ShapeManager;
 import WizardTD.Manager.TextManager;
 import WizardTD.Pattern.Path;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -26,6 +24,9 @@ class ManaBarTest {
         app.textManager = new TextManager();
     }
 
+    /**
+     * Test getter methods in ManaBar.
+     */
     @Test
     void testGetter() {
         assertEquals(0, manaBar.getX());
@@ -37,12 +38,18 @@ class ManaBarTest {
         assertEquals("", manaBar.getLabel());
     }
 
+    /**
+     * Test setProcess(float) method in ManaBar.
+     */
     @Test
     void testSetProcess() {
         manaBar.setProcess(300);
         assertEquals(300, manaBar.getProcess());
     }
 
+    /**
+     * Test updateProcess(boolean) method in ManaBar.
+     */
     @Test
     void testUpdateProcess() {
         App.IS_ACCELERATE = true;
@@ -58,6 +65,9 @@ class ManaBarTest {
         assertEquals(880, manaBar.getProcess());
     }
 
+    /**
+     * Test beAttacked(Monster) method in ManaBar.
+     */
     @Test
     void testBeAttacked() {
         Beetle beetle = new Beetle(app.paths.getStartPoints().get(0), app,
@@ -66,6 +76,9 @@ class ManaBarTest {
         assertEquals(100, manaBar.getProcess());
     }
 
+    /**
+     * Test addMonsterMana(Monster) method in ManaBar.
+     */
     @Test
     void testAddMonsterMana() {
         Beetle beetle = new Beetle(app.paths.getStartPoints().get(0), app,
@@ -74,6 +87,9 @@ class ManaBarTest {
         assertEquals(210, manaBar.getProcess());
     }
 
+    /**
+     * Test updateManaBar(ManaPool) method in ManaBar.
+     */
     @Test
     void testUpdateManaBar() {
         ManaPool manaPool = new ManaPool(0, 0, 10, app.jsonInfo);
@@ -83,6 +99,9 @@ class ManaBarTest {
         assertEquals(100, manaBar.getProcess());
     }
 
+    /**
+     * Test display(App, ShapeManager, TextManager) method in ManaBar.
+     */
     @Test
     void testDisplay() {
         manaBar.display(app, app.shapeManager, app.textManager);

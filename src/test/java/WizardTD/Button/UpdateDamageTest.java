@@ -2,7 +2,6 @@ package WizardTD.Button;
 
 import WizardTD.App;
 import WizardTD.Pattern.Tower;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -10,6 +9,9 @@ import static org.junit.jupiter.api.Assertions.*;
 class UpdateDamageTest{
     App app = new App();
 
+    /**
+     * Test clickButton(App) method in UpdateDamage.
+     */
     @Test
     void testClickButton() {
         app.isUpdateTower = new boolean[3];

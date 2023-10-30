@@ -4,8 +4,6 @@ import WizardTD.App;
 import WizardTD.Pattern.Path;
 import processing.data.JSONObject;
 
-import java.awt.image.BufferedImage;
-
 /**
  * The monster type Beetle.
  */

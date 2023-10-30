@@ -46,6 +46,9 @@ public class MonsterTest {
         app.wizardHouse = new WizardHouse(2, 0);
     }
 
+    /**
+     * Test if the Monster can be instantiated correctly.
+     */
     @Test
     void testConstructor() {
         assertEquals("gremlin.png", monster.getType());
@@ -60,18 +63,27 @@ public class MonsterTest {
                 app.jsonInfo.getWaves().getJSONObject(0).getJSONArray("monsters").getJSONObject(0));
     }
 
+    /**
+     * Test setDie(boolean) method in Monster.
+     */
     @Test
-    void testDie() {
+    void testSetDie() {
         monster.setDie(true);
         assertTrue(monster.isDie());
     }
 
+    /**
+     * Test setHp(int) method in Monster.
+     */
     @Test
     void testSetHP() {
         monster.setHp(10);
         assertEquals(95, monster.getHp());
     }
 
+    /**
+     * Test setAccelerate() method in Monster.
+     */
     @Test
     void testSetAccelerate() {
         App.IS_ACCELERATE = false;
@@ -82,16 +94,25 @@ public class MonsterTest {
         assertEquals(1, monster.getSpeed());
     }
 
+    /**
+     * Test getTopHp() method in Monster.
+     */
     @Test
     void testGetTopHP() {
         assertEquals(100, monster.getTopHp());
     }
 
+    /**
+     * Test getManaGainedOnKill() method in Monster.
+     */
     @Test
     void testGetManaGainedOnKill() {
         assertEquals(10, monster.getManaGainedOnKill());
     }
 
+    /**
+     * Test move(App) method in Monster.
+     */
     @Test
     void testMove() {
         App.IS_ACCELERATE = false;
@@ -141,6 +162,9 @@ public class MonsterTest {
         assertEquals(31, monster.y);
     }
 
+    /**
+     * Test monsterDie(App) method in Monster.
+     */
     @Test
     void testMonsterDie() {
         assertFalse(monster.monsterDie(app));
@@ -171,6 +195,9 @@ public class MonsterTest {
         assertTrue(monster.monsterDie(app));
     }
 
+    /**
+     * Test addShape(App, ShapeManager) method in Monster.
+     */
     @Test
     void testAddShape() {
         monster.image = new PImage();

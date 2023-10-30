@@ -1,7 +1,5 @@
 package WizardTD.Pattern;
 
-import WizardTD.App;
-
 /**
  * This class define the grass part in the map.
  */
